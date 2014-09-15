@@ -401,7 +401,7 @@ module.exports = function (grunt) {
     git_deploy: {
       heroku: {
         options: {
-          url: 'git@github.com:tabletop.git',
+          url: 'git@heroku.com:tabletopstaging.git',
           branch: 'master',
           message: 'autocommit'
         },
