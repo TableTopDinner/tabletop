@@ -3,6 +3,16 @@
 <div class="{{user.provider === 'password'? 'col-md-4' : 'col-md-12'}}">
   <h3>Profile</h3>
 
+  <!-- START Image File Upload -->
+  <!-- <div class="upload-image-block"> -->
+    <img ng-src="{{profile.image}}" name="image" ng-model="profile.image" width="100" id="userImage">
+    <label>Upload New Picture</label>
+    <input type="file" class="form-control" accept="image/*" capture="camera">
+    <br>
+    <!-- <div id="spinNormal"></div> -->
+  <!-- </div> -->
+  <!-- END Image File Upload -->
+
   <form role="form">
     <p class="form-group">
       <label>Account ID</label>

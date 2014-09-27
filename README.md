@@ -3,17 +3,18 @@ TableTop
 
 TableTop Web Application. Node/Express/Angular Deployed to Heroku and connected to Firebase. Built With Yeoman, [generator-angularfire](https://github.com/firebase/generator-angularfire)
 
-Dependencies
+Dependencies - If not installed already do this first!
 ---------
-- Node
-- Bower Package Manager
-- Grunt
+- Node - `brew install -g node`
+- Bower Package Manager - `npm install bower`
+- Grunt - `npm install grunt`
 
 Setup Instructions
 ---------
 - `git clone https://github.com/TableTopDinner/tabletop.git`
 - `npm install`
 - `bower install`
+- `sudo gem install compass`
 
 Running Locally on [localhost:9000/#/](localhost:9000/#/)
 ---------
