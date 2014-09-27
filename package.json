@@ -1,7 +1,10 @@
 {
   "name": "tabletop",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.9.5",
+    "gzippo": "^0.2.0"
+  },
   "devDependencies": {
     "chalk": "^0.4.0",
     "grunt": "^0.4.5",
