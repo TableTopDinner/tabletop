@@ -1,6 +1,8 @@
 {
   "name": "tabletop",
   "version": "0.0.0",
+  "description": "TableTop Node.js app using Express 4 and Angular",
+  "main": "web.js",
   "dependencies": {
     "express": "^4.9.5",
     "gzippo": "^0.2.0"
@@ -41,6 +43,12 @@
     "node": ">=0.10.0"
   },
   "scripts": {
-    "test": "grunt test"
-  }
+    "test": "grunt test",
+    "start": "node web.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TableTop/tabletop"
+  },
+  "author": "Thomas"
 }
