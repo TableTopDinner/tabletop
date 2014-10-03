@@ -21,7 +21,7 @@ Running Locally
 ---------
 - `grunt serve`
 
-Build/Minify to coursekarma/dist
+Build/Minify to tabletop/dist
 ----------
 - `grunt build`
 
