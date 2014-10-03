@@ -1,4 +1,4 @@
-// Generated on 2014-09-15 using generator-angularfire 0.8.2-7
+// Generated on 2014-10-03 using generator-angularfire 0.8.2-7
 'use strict';
 
 // # Globbing
@@ -20,15 +20,6 @@ module.exports = function (grunt) {
     app: require('./bower.json').appPath || 'app',
     dist: 'dist'
   };
-
-  //START Manually Added Section//
-
-    //https://github.com/gruntjs/grunt-contrib-compass
-    grunt.loadNpmTasks('grunt-contrib-compass');
-    //Heroku Deploy
-    grunt.loadNpmTasks('grunt-git-deploy');
-
-  //END Manually Added Section//
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -172,6 +163,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     wiredep: {
       options: {
+        cwd: ''
       },
       app: {
         src: ['<%= yeoman.app %>/index.html'],
@@ -395,18 +387,6 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    },
-
-    //Manually added for heroku deploy
-    git_deploy: {
-      heroku: {
-        options: {
-          url: 'git@heroku.com:tabletopstaging.git',
-          branch: 'master',
-          message: 'autocommit'
-        },
-        src: '<%= yeoman.dist %>'
-      },
     }
   });
 
@@ -453,8 +433,7 @@ module.exports = function (grunt) {
     'uglify',
     'filerev',
     'usemin',
-    'htmlmin',
-    'git_deploy' 
+    'htmlmin'
   ]);
 
   grunt.registerTask('default', [

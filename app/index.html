@@ -20,26 +20,6 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-        <!-- START Facebook SDK for JavaScript -->
-        <script>
-            window.fbAsyncInit = function() {
-              FB.init({
-                appId      : '1470775273198290',
-                xfbml      : true,
-                version    : 'v2.1'
-              });
-            };
-
-            (function(d, s, id){
-               var js, fjs = d.getElementsByTagName(s)[0];
-               if (d.getElementById(id)) {return;}
-               js = d.createElement(s); js.id = id;
-               js.src = "//connect.facebook.net/en_US/sdk.js";
-               fjs.parentNode.insertBefore(js, fjs);
-             }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <!-- END Facebook SDK for JavaScript -->
-      
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
@@ -57,8 +37,7 @@
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from TCho</p>
-        <!-- the Yeoman team -->
+        <p><span class="glyphicon glyphicon-heart"></span> from the TT Team <span style="float: right">CK Beta v0.0.1</span></p>
       </div>
     </div>
 

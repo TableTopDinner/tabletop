@@ -1,29 +1,38 @@
 TableTop
 =======
 
-TableTop Web Application. Node/Express/Angular Deployed to Heroku and connected to Firebase. Built With Yeoman, [generator-angularfire](https://github.com/firebase/generator-angularfire)
+TableTop Web Application. Node/Express/Angular App hosted to Firebase and connected to AngularFire. 
+Built With Yeoman, [generator-angularfire](https://github.com/firebase/generator-angularfire).
 
-Dependencies - If not installed already do this first!
+Dependencies - If not already installed, do this first!
 ---------
 - Node - `brew install -g node`
-- Bower Package Manager - `npm install bower`
+- Bower - `npm install bower`
 - Grunt - `npm install grunt`
 
 Setup Instructions
 ---------
-- `git clone https://github.com/TableTopDinner/tabletop.git`
+- `git clone https://github.com/stcho/coursekarma.git`
 - `npm install`
 - `bower install`
 - `sudo gem install compass`
 
-Running Locally on [localhost:9000/#/](localhost:9000/#/)
+Running Locally
 ---------
 - `grunt serve`
 
-Build + Deploy to Heroku
+Build/Minify to coursekarma/dist
 ----------
 - `grunt build`
 
+Deployment
+----------
+Make sure to change firebase references in `firebase.json` as well as `app/scripts/angularfire/config.js` before deploying.
+
+- `firebase deploy`
+- `firebase open`
+
 Firebase Reference
 ----------
-- [https://tabletopstaging.firebaseio.com/](https://tabletopstaging.firebaseio.com/)
+- Production - [https://tabletopdinner.firebaseio.com/](https://tabletopdinner.firebaseio.com/)
+- Staging - [https://tabletopstaging.firebaseio.com/](https://tabletopstaging.firebaseio.com/)

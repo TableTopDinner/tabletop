@@ -13,23 +13,6 @@ angular.module('tabletopApp')
     $scope.messages = [];
     loadProfile(user);
 
-//  *** START profile image upload ***
-    $scope.uploadImage = function() {
-
-      var img = new Image(); //new Image object that will be instantiate with the uploaded image data
-      
-      //Resize the image using canvas
-      function imageResizeToDataURL(image, width, height) {
-          var canvas = document.createElement("canvas");
-          canvas.width = width;
-          canvas.height = height;
-          canvas.getContext("2d").drawImage(image, 0, 0, width, height);
-          return canvas.toDataURL();
-      }
-    }
-//  *** END profile image upload ***
-
-//  *** START Given from generator ***
     $scope.changePassword = function(oldPass, newPass, confirm) {
       $scope.err = null;
       if( !oldPass || !newPass ) {
@@ -78,5 +61,4 @@ angular.module('tabletopApp')
       }
       fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
     }
-//  *** END Given from generator ***
   });
