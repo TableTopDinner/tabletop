@@ -1,0 +1,74 @@
+<!-- <div ng-include src="'views/main.html'"></div> -->
+<div class="jumbotron">
+  <h1>TableTop</h1>
+  <p class="lead">
+    <img src="images/tabletoplogo.png" alt="TableTop Logo"><br>
+    Streamlining philanthropy into your schedule.
+  </p>
+  <p><a class="btn btn-lg btn-success" ng-href="http://www.tabletopdinners.com/" target="blank">TT Away!<span class="glyphicon glyphicon-ok"></span></a></p>
+</div>
+
+<div class="row marketing">
+  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
+    <br>
+    <h4><i class="fa fa-users"></i> Label 1</h4>
+    <p style="padding-right:15px;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    </p>
+
+    <h4><i class="fa fa-share-square-o"></i> Label 2</h4>
+    <p>
+      Aenean bibendum semper neque. Ut luctus luctus arcu.
+    </p>
+
+    <h4><i class="fa fa-question-circle"></i> Label 3</h4>
+    <p style="padding-right:15px;">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+    </p>
+
+    <h4><i class="fa fa-graduation-cap"></i> Label 4</h4>
+    <p>
+      Aenean bibendum semper neque. Ut luctus luctus arcu.
+    </p>
+  </div>
+
+  <div class="sign-up-group col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    <h2 id="sign-up">Sign Up</h2>
+
+    <fieldset>
+      <!-- <legend>Oauth</legend> -->
+      <p>
+        <button class="btn btn-primary" ng-click="oauthlogin('facebook')">Facebook</button>
+      </p>
+
+      <img src="images/fading-section-break.png" alt="fading-break">
+      or
+      <img src="images/fading-section-break.png" alt="fading-break-flip" style="transform:rotate(180deg);">
+
+    </fieldset>
+
+    <form role="form">
+      <p class="form-group">
+        <label for="loginEmail">email</label>
+        <input id="loginEmail" required name="email" type="email" ng-model="email" class="form-control" />
+      </p>
+      <p class="form-group">
+        <label for="loginPass">password</label>
+        <input id="loginPass" required name="pass" type="password" ng-model="pass" class="form-control" />
+      </p>
+      <p class="form-group" ng-cloak ng-hide="createMode">
+        <label for="loginConfirm">confirm pass</label>
+        <input id="loginConfirm" required name="confirm" type="password" ng-model="confirm" class="form-control" />
+      </p>
+
+      <p>
+        <button  class="btn btn-success" ng-click="passwordLogin(email, pass)" ng-show="createMode">Log In</button>
+        <button  class="btn btn-primary" ng-cloak ng-hide="createMode"
+                ng-click="createAccount(email, pass, confirm)">Join <span class="glyphicon glyphicon-ok"></span></button> 
+        <button  class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Log In</button>
+        <button  class="btn btn-default" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
+      </p>
+    </form>
+    <p ng-show="err" class="bg-danger">{{err}}</p>
+  </div>
+</div>

@@ -58,9 +58,13 @@ angular.module('tabletopApp')
   .config(['$routeProvider', function($routeProvider) {
     $routeProvider
       .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+        templateUrl: 'views/signup.html',
+        controller: 'LoginCtrl'
       })
+      // .whenAuthenticated('/main', {
+      //   templateUrl: 'views/main.html',
+      //   controller: 'MainCtrl'
+      // })
 
       .when('/login', {
         templateUrl: 'views/login.html',
@@ -70,6 +74,11 @@ angular.module('tabletopApp')
       .when('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'
+      })
+
+      .whenAuthenticated('/dashboard', {
+        templateUrl: 'views/dashboard.html',
+        controller: 'DashboardCtrl'
       })
 
       .whenAuthenticated('/account', {

@@ -12,7 +12,7 @@ Dependencies - If not already installed, do this first!
 
 Setup Instructions
 ---------
-- `git clone https://github.com/stcho/coursekarma.git`
+- `git clone https://github.com/TableTopDinner/tabletop.git`
 - `npm install`
 - `bower install`
 - `sudo gem install compass`
