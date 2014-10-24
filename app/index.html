@@ -12,6 +12,10 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+
+    <!-- ADD FONT AWESOME -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
     <!-- endbuild -->
   </head>
   <body ng-app="tabletopApp">
@@ -23,7 +27,7 @@
     <div class="container">
       <div class="header">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a ng-href="#">Home</a></li>
+          <li class="active"><a ng-href="#/dashboard">Home</a></li>
           <!-- //angularfire -->
           <li><a ng-href="#/chat">chat</a></li>
           <li>
@@ -37,7 +41,7 @@
       <div ng-view=""></div>
 
       <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the TT Team <span style="float: right">CK Beta v0.0.1</span></p>
+        <p><span class="glyphicon glyphicon-heart"></span> from the TT Team <span style="float: right">Beta v0.0.1</span></p>
       </div>
     </div>
 
@@ -103,6 +107,7 @@
         <script src="scripts/directives/ngShowAuth.js"></script>
         <script src="scripts/directives/ngHideAuth.js"></script>
         <script src="scripts/routes.js"></script>
+        <script src="scripts/controllers/dashboard.js"></script>
         <!-- endbuild -->
 </body>
 </html>
