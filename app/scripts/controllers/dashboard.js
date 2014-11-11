@@ -20,6 +20,8 @@ angular.module('tabletopApp')
 
     //Instantiating a new array for restaurants 
     $scope.restaurants = []; 
+    //To identify when all restaurants are loaded to show them all in sync
+    $scope.restaurantsLoaded = false;
 
 		//Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
     var j = 0;
@@ -35,7 +37,8 @@ angular.module('tabletopApp')
             $scope.$apply($scope.restaurants);
             console.log("Restaurant: " + j);    
        });
-        console.log("Restaurants All Loaded");   
+      console.log("Restaurants All Loaded");   
+      $scope.restaurantsLoaded = true;
     });
 
     //Refreshes the add restaurant modal everytime it is selected (clicked on).

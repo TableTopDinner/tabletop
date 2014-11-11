@@ -1,1 +1,128 @@
-<button ng-click="alert()">Add Restaurant</button>
+<div class="container">  
+
+	<button data-toggle="modal" data-target="#createRestaurantModal">Create Restaurant</button>
+
+<!-- ************************************************************** -->
+<!-- ************** SECTION: MAIN RESTAURANTS DISPLAY ************* -->
+
+	<!-- START Create New Restaurant Selectable -->
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 restaurant-thumbs" ng-animate="'animate'" ng-show="restaurantsLoaded">
+    <div class="card-background-v4" ng-click="instantiateRestaurant(restaurant)" data-toggle="modal" data-target="#createRestaurantModal">
+      <img src="../images/ttplaceholder.png" class="img-responsive card-img">
+      <div class="card-header text-center">Create New Restaurant</div>
+      <div class="card-description">Click here to add new Restaurants!</div>
+    </div>
+  </div>
+  <!-- END Create New Restaurant Selectable -->
+
+  <!-- START previously created Restaurants Selectable -->
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 restaurant-thumbs" ng-repeat="restaurant in restaurants track by $index" ng-animate="'animate'" ng-show="restaurantsLoaded">
+    <div class="card-background-v4" ng-click="selectRestaurant(restaurant)" data-toggle="modal" data-target="#updateRestaurantModal">
+			<img ng-src="{{restaurant.image}}" class="img-responsive card-img" >
+			<div class="card-header">{{restaurant.name}}</div>
+			<div class="card-description">{{restaurant.description | cut:true:105:'...'}}</div>
+		</div>
+
+  </div>
+  <!-- END previously created Restaurants Selectable -->
+
+<!-- ************** SECTION: MAIN RESTAURANT DISPLAY ************* -->
+<!-- ************************************************************* -->
+
+
+<!-- ***************************************************************** -->
+<!-- ************** SECTION: CREATE NEW RESTAURANT MODAL ************* -->
+
+<!-- START Create New Restaurant Modal Template-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="createRestaurantModal" id="createRestaurantModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg md-effect-1">
+
+    <div class="modal-content">
+
+      <div class="modal-dismiss">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+
+      <div class="row modalDetail">
+        <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
+          <div class="middle-allign">
+            <h1 class="detailName">
+              <input type="text" ng-model="selectedRestaurant.name" name="name" placeholder="Name">
+            </h1>
+            <div class="detailDescription">
+              <textarea name="description" ng-model="selectedRestaurant.description" placeholder="Description"></textarea>
+            </div>
+            <table class="detailTable table">
+              <tbody>
+                <tr>
+                  <td class="bolder">Status</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.status" name="status" placeholder="Previous, Active, or Upcoming">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Brands</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.brand" name="brand" placeholder="Brand" >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Type</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.type" name="type" placeholder="Type">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">URL</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.url" name="url" placeholder="URL">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Contact</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.contact" name="contact" placeholder="Contact">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Location</td>
+                  <td>
+                    <input type="text" ng-model="selectedRestaurant.location" name="location" placeholder="Location">
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- START Error & Success Messages -->
+            <div class="text-center missingFieldError" id="missingFieldError"></div>
+            <!-- End Error & Success Messages -->
+
+            <div class="modalButtonGroup">
+              <button class="btn modalButton" ng-click="createRestaurant(selectedRestaurant)">Create</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
+            <img src="../images/ttplaceholder.png" class="img-responsive" id="panoAdd"> 
+              <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
+              <span class="btn btn-default btn-file">
+                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+              </span>
+              <div id="spinAdd"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ************** SECTION: CREATE NEW RESTAURANT MODAL ************* -->
+<!-- ***************************************************************** -->
+
+</div>
