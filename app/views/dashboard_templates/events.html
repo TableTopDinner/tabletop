@@ -1,23 +1,38 @@
-<div class="container">  
-
-  <button data-toggle="modal" data-target="#createEventModal">Create Event</button>
+<br>
+<br>
 
 <!-- ************************************************************** -->
 <!-- ************** SECTION: MAIN EventS DISPLAY ************* -->
 
   <!-- START Create New Event Selectable -->
-  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 Event-thumbs" ng-animate="'animate'" ng-show="eventsLoaded">
-    <div class="card-background-v4" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
-      <img src="../images/ttplaceholder.png" class="img-responsive card-img">
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
+    <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
+      <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
       <div class="card-header text-center">Create New Event</div>
-      <div class="card-description">Click here to add new Events!</div>
+      <div class="card-description">Click here to add a new Event!</div>
     </div>
   </div>
   <!-- END Create New Event Selectable -->
 
+  <!-- Example view -->
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
+    <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
+      <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
+      <div class="card-header text-center">Example 1</div>
+      <div class="card-description">This is example 1!</div>
+    </div>
+  </div>
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
+    <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
+      <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
+      <div class="card-header text-center">Example 2</div>
+      <div class="card-description">This is example 2!</div>
+    </div>
+  </div>
+
   <!-- START previously created Events Selectable -->
-  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 event-thumbs" ng-repeat="event in events track by $index" ng-animate="'animate'" ng-show="EventsLoaded">
-    <div class="card-background-v4" ng-click="selectEvent(Event)" data-toggle="modal" data-target="#updateEventModal">
+  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-repeat="event in events track by $index" ng-animate="'animate'">
+    <div class="card-background" ng-click="selectEvent(Event)" data-toggle="modal" data-target="#updateEventModal">
       <img ng-src="{{Event.image}}" class="img-responsive card-img" >
       <div class="card-header">{{Event.name}}</div>
       <div class="card-description">{{Event.description | cut:true:105:'...'}}</div>
@@ -141,5 +156,3 @@
 
 <!-- ************** SECTION: CREATE NEW Event MODAL ************* -->
 <!-- ***************************************************************** -->
-
-</div>

@@ -1,34 +1,42 @@
-<div class="col-md-4" ng-show="{{user.provider === 'password'}}">
-    
-    <button data-toggle="modal" data-target="#createRestaurantModal">Create Restaurant</button>
+<!-- <div ng-show="{{user.provider === 'password'}}"> -->
+    <br>
+    <div style="border: solid;" data-toggle="modal" data-target="#createRestaurantModal">
+      <i style="margin: 15px;" class="fa fa-plus-circle fa-4x"><span> Create Restaurant</span></i>
+    </div>
+    <br>
+    <!-- <img src="images/fading-section-break.png" alt="fading-break">
+    <img src="images/fading-section-break.png" alt="fading-break-flip" style="transform:rotate(180deg);"> -->
+
+    <!-- <button data-toggle="modal" data-target="#createRestaurantModal">Create Restaurant</button> -->
 
     <!-- ************************************************************** -->
     <!-- ************** SECTION: MAIN RESTAURANTS DISPLAY ************* -->
 
     <!-- START Create New Restaurant Selectable -->
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 restaurant-thumbs" ng-animate="'animate'" ng-show="restaurantsLoaded">
-      <div class="card-background-v4" ng-click="instantiateRestaurant(restaurant)" data-toggle="modal" data-target="#createRestaurantModal">
-        <img src="../images/ttplaceholder.png" class="img-responsive card-img">
+    <!-- <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'" ng-show="restaurantsLoaded">
+      <div class="card-background" ng-click="instantiateRestaurant(restaurant)" data-toggle="modal" data-target="#createRestaurantModal">
+        <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
         <div class="card-header text-center">Create New Restaurant</div>
         <div class="card-description">Click here to add new Restaurants!</div>
       </div>
-    </div>
+    </div> -->
     <!-- END Create New Restaurant Selectable -->
 
     <!-- START previously created Restaurants Selectable -->
-    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 restaurant-thumbs" ng-repeat="restaurant in restaurants track by $index" ng-animate="'animate'" ng-show="restaurantsLoaded">
-      <div class="card-background-v4" ng-click="selectRestaurant(restaurant)" data-toggle="modal" data-target="#updateRestaurantModal">
+    <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-repeat="restaurant in restaurants track by $index" ng-animate="'animate'" ng-show="restaurantsLoaded">
+      <div class="card-background" ng-click="selectRestaurant(restaurant)" data-toggle="modal" data-target="#updateRestaurantModal">
         <img ng-src="{{restaurant.image}}" class="img-responsive card-img" >
         <div class="card-header">{{restaurant.name}}</div>
         <div class="card-description">{{restaurant.description | cut:true:105:'...'}}</div>
       </div>
     </div>
 
-  </div>  
+  <!-- </div>   -->
     <!-- END previously created Restaurants Selectable -->
 
   <!-- ************** SECTION: MAIN RESTAURANT DISPLAY ************* -->
   <!-- ************************************************************* -->
+
 
 
 <!-- ***************************************************************** -->
