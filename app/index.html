@@ -12,6 +12,7 @@
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/card.css">
 
     <!-- ADD FONT AWESOME -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -24,8 +25,8 @@
     <![endif]-->
 
     <!-- Add your site or application content here -->
-    <div class="container">
-      <div class="header">
+    <div class="header">
+      <div class="container">
         <ul class="nav nav-pills pull-right">
           <li class="active"><a ng-href="#/dashboard">Home</a></li>
           <!-- //angularfire -->
@@ -38,11 +39,14 @@
         <h3 class="text-muted">tabletop</h3>
       </div>
 
-      <div ng-view=""></div>
+    </div>
 
-      <div class="footer">
-        <p><span class="glyphicon glyphicon-heart"></span> from the TT Team <span style="float: right">Beta v0.0.1</span></p>
-      </div>
+    <div ng-view=""></div>
+
+    <div class="footer">
+      <div class="containter text-center">
+        <p>Beta v0.0.1 <span class="glyphicon glyphicon-heart"></span> from the TT Team</p>
+      </div>  
     </div>
 
 

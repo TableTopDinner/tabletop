@@ -77,7 +77,7 @@ angular.module('tabletopApp')
       })
 
       .whenAuthenticated('/dashboard', {
-        templateUrl: 'views/dashboard.html',
+        templateUrl: 'views/dashboard_templates/dashboard.html',
         controller: 'DashboardCtrl'
       })
 
