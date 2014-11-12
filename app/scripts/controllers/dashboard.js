@@ -8,15 +8,42 @@
  * Controller of the tabletopApp
  */
 angular.module('tabletopApp')
-  .controller('DashboardCtrl', function ($scope) {
+  //Filter to Limit amount of text displayed, used in card views
+  .filter('cut', function () {
+          return function (value, wordwise, max, tail) {
+              if (!value) return '';
+
+              max = parseInt(max, 10);
+              if (!max) return value;
+              if (value.length <= max) return value;
+
+              value = value.substr(0, max);
+              if (wordwise) {
+                  var lastspace = value.lastIndexOf(' ');
+                  if (lastspace != -1) {
+                      value = value.substr(0, lastspace);
+                  }
+              }
+              return value + (tail || ' …');
+          };
+  })
+
+  .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout) {
     
-    $scope.alert = function(){
-		alert("HEELO");
-		};
+    //Load our user, in order to create restaurants for this user
+    $scope.user = user;
+    loadProfile(user);
+
+    function loadProfile(user) {
+      if( $scope.profile ) {
+        $scope.profile.$destroy();
+      }
+      fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
+    }
 
 		//PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
-    var tableRef = new Firebase('https:////tabletopstaging.firebaseio.com/'); 
-    var callTableRef = $firebase(tableRef);
+    var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/'); 
+    // var callTableRef = $firebase(tableRef);
 
     //Instantiating a new array for restaurants 
     $scope.restaurants = []; 
@@ -40,6 +67,35 @@ angular.module('tabletopApp')
       console.log("Restaurants All Loaded");   
       $scope.restaurantsLoaded = true;
     });
+
+
+    // $scope.dashboardTemplateLoader = function(template) {
+    //   var template_dom_string = "<div ng-include src=\"\'views/dashboard_templates/" + template + ".html\'\"></div>"
+
+    //   console.log(template_dom_string);
+
+    //   document.getElementById("dashboard_template_loaded_here").innerHTML = "<div ng-include src=\"\'views/dashboard_templates/restaurants.html\'\"></div>";
+    // }
+
+    $scope.restaurantsShow = true;
+    $scope.eventsShow = false;
+    $scope.analysisShow = false;
+    $scope.paymentShow = false;
+    $scope.dashboardTemplateLoader = function(template) {
+         if(template == 'restaurants') {
+             $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
+         }
+         if(template == 'events') {
+             $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentShow = false;
+         }
+         if(template == 'analysis') {
+             $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentShow = false;
+         }
+         if(template == 'payment') {
+             $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = true;
+         }
+    }
+
 
     //Refreshes the add restaurant modal everytime it is selected (clicked on).
     $scope.instantiateRestaurant = function(object) {

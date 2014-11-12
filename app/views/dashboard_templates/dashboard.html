@@ -1,0 +1,18 @@
+<div class="container">  
+
+<!-- START Cashboard Buttons -->
+  <div class="btn-group" role="group" aria-label="dashboard">
+    <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('restaurants')">Restaurants</button>
+    <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('events')">Events</button>
+    <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('payment')">Payment</button>
+    <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('analysis')">Analysis</button>
+    <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('other')">Other</button>
+  </div>
+
+<!-- START Template Render -->
+  <div ng-show="restaurantsShow"><div ng-include src="'views/dashboard_templates/restaurants.html'"></div></div>
+  <div ng-show="eventsShow"><div ng-include src="'views/dashboard_templates/events.html'"></div></div>
+  <div ng-show="analysisShow"><div ng-include src="'views/dashboard_templates/payment.html'"></div></div>
+  <div ng-show="paymentsShow"><div ng-include src="'views/dashboard_templates/analysis.html'"></div></div>
+
+</div>
