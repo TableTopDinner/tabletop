@@ -1,6 +1,5 @@
 <!-- <div ng-include src="'views/main.html'"></div> -->
 <div class="container">
-
   <div class="jumbotron">
     <h1>TableTop</h1>
     <p class="lead">
@@ -11,11 +10,11 @@
   </div>
 
   <div class="row marketing">
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">  
+    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
       <br>
       <h4><i class="fa fa-users"></i> Label 1</h4>
       <p style="padding-right:15px;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
 
       <h4><i class="fa fa-share-square-o"></i> Label 2</h4>
@@ -25,7 +24,7 @@
 
       <h4><i class="fa fa-question-circle"></i> Label 3</h4>
       <p style="padding-right:15px;">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
       </p>
 
       <h4><i class="fa fa-graduation-cap"></i> Label 4</h4>
@@ -46,7 +45,6 @@
         <img src="images/fading-section-break.png" alt="fading-break">
         or
         <img src="images/fading-section-break.png" alt="fading-break-flip" style="transform:rotate(180deg);">
-
       </fieldset>
 
       <form role="form">
@@ -66,7 +64,7 @@
         <p>
           <button  class="btn btn-success" ng-click="passwordLogin(email, pass)" ng-show="createMode">Log In</button>
           <button  class="btn btn-primary" ng-cloak ng-hide="createMode"
-                  ng-click="createAccount(email, pass, confirm)">Join <span class="glyphicon glyphicon-ok"></span></button> 
+                  ng-click="createAccount(email, pass, confirm)">Join <span class="glyphicon glyphicon-ok"></span></button>
           <button  class="btn btn-default" ng-click="createMode = true" ng-hide="createMode">Log In</button>
           <button  class="btn btn-default" ng-cloak ng-show="createMode" ng-click="createMode = false">Cancel</button>
         </p>
@@ -74,5 +72,4 @@
       <p ng-show="err" class="bg-danger">{{err}}</p>
     </div>
   </div>
-
 </div>
