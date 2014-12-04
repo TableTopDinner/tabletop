@@ -71,9 +71,11 @@ angular.module('tabletopApp')
         controller: 'LoginCtrl'
       })
 
-      .when('/chat', {
-        templateUrl: 'views/chat.html',
-        controller: 'ChatCtrl'
+      .when('/about', {
+        templateUrl: 'views/about.html'
+      })
+      .when('/contact', {
+        templateUrl: 'views/contact.html'
       })
 
       .whenAuthenticated('/dashboard', {
