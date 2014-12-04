@@ -31,12 +31,14 @@
     <div class="header">
       <!-- <div class="container"> -->
         <ul class="nav nav-pills pull-right" style="margin-right: 38px">
-          <li class="active"><a ng-href="#/dashboard">Home</a></li>
+          <li class="active"><a ng-href="#/dashboard">Dashboard</a></li>
           <!-- //angularfire -->
-          <li><a ng-href="#/chat">chat</a></li>
+          <!-- <li><a ng-href="#/chat">chat</a></li> -->
+          <li><a ng-href="#/about">About</a></li>
+          <li><a ng-href="#/contact">Contact</a></li>
           <li>
-            <a ng-hide-auth="" href="#/login">log in</a>
-            <a ng-show-auth="" href="#/account">account</a>
+            <a ng-hide-auth="" href="#/login">Log In</a>
+            <a ng-show-auth="" href="#/account">Profile</a>
           </li>
           </ul>
         <h3 class="text-muted" style="margin-left: 38px">tabletop</h3>
@@ -47,7 +49,7 @@
     <div ng-view=""></div>
 
     <div class="footer">
-      <div class="containter text-center">
+      <div class="containter text-center" style="bottom">
         <p>Beta v0.0.1 <span class="glyphicon glyphicon-heart"></span> from the TT Team</p>
       </div>  
     </div>
