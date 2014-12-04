@@ -77,22 +77,26 @@ angular.module('tabletopApp')
     //   document.getElementById("dashboard_template_loaded_here").innerHTML = "<div ng-include src=\"\'views/dashboard_templates/restaurants.html\'\"></div>";
     // }
 
-    $scope.restaurantsShow = true;
+    $scope.mainShow = true;
+    $scope.restaurantsShow = false;
     $scope.eventsShow = false;
     $scope.analysisShow = false;
     $scope.paymentShow = false;
     $scope.dashboardTemplateLoader = function(template) {
+         if(template == 'main') {
+             $scope.mainShow = true; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
+         }
          if(template == 'restaurants') {
-             $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
          }
          if(template == 'events') {
-             $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentShow = false;
          }
          if(template == 'analysis') {
-             $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentShow = false;
          }
          if(template == 'payment') {
-             $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = true;
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = true;
          }
     }
 

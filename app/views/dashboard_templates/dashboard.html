@@ -30,6 +30,9 @@
         <div class="container-fluid">
             <div class="row">   
               <!-- START Template Render -->
+                <div ng-show="mainShow">
+                  <div ng-include src="'views/dashboard_templates/main.html'"></div>
+                </div>
                 <div ng-show="restaurantsShow">
                   <div ng-include src="'views/dashboard_templates/restaurants.html'"></div>
                 </div>
