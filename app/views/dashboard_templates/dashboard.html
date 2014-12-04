@@ -25,7 +25,7 @@
 					Analysis</a>
             </li>
             <li>
-                <a ng-click="dashboardTemplateLoader('payment')">
+                <a ng-click="dashboardTemplateLoader('payments')">
 					<span><i class="fa fa-dollar" style="margin-right: 5px"></i></span>
 					Payments</a>
             </li>
@@ -48,10 +48,10 @@
                   <div ng-include src="'views/dashboard_templates/events.html'"></div>
                 </div>
                 <div ng-show="analysisShow">
-                  <div ng-include src="'views/dashboard_templates/payment.html'"></div>
+                  <div ng-include src="'views/dashboard_templates/analysis.html'"></div>
                 </div>
                 <div ng-show="paymentsShow">
-                  <div ng-include src="'views/dashboard_templates/analysis.html'"></div>
+                  <div ng-include src="'views/dashboard_templates/payments.html'"></div>
                 </div>
 
             </div>

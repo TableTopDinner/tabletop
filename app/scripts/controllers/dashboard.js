@@ -69,34 +69,27 @@ angular.module('tabletopApp')
     });
 
 
-    // $scope.dashboardTemplateLoader = function(template) {
-    //   var template_dom_string = "<div ng-include src=\"\'views/dashboard_templates/" + template + ".html\'\"></div>"
-
-    //   console.log(template_dom_string);
-
-    //   document.getElementById("dashboard_template_loaded_here").innerHTML = "<div ng-include src=\"\'views/dashboard_templates/restaurants.html\'\"></div>";
-    // }
-
+    // Changes the layout in dashboard
     $scope.mainShow = true;
     $scope.restaurantsShow = false;
     $scope.eventsShow = false;
     $scope.analysisShow = false;
-    $scope.paymentShow = false;
+    $scope.paymentsShow = false;
     $scope.dashboardTemplateLoader = function(template) {
          if(template == 'main') {
-             $scope.mainShow = true; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
+             $scope.mainShow = true; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = false;
          }
          if(template == 'restaurants') {
-             $scope.mainShow = false; $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = false;
          }
          if(template == 'events') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentsShow = false;
          }
          if(template == 'analysis') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentShow = false;
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentsShow = false;
          }
-         if(template == 'payment') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = true;
+         if(template == 'payments') {
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = true;
          }
     }
 
