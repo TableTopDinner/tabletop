@@ -60,5 +60,6 @@ angular.module('tabletopApp')
         $scope.profile.$destroy();
       }
       fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
+      fbutil.syncObject('users/'+user.uid.name).$bindTo($scope, 'profile');
     }
   });

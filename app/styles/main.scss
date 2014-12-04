@@ -70,8 +70,8 @@ body {
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {
-  .container {
-    // max-width: 730px;
+  .container#narrower {
+    max-width: 730px;
   }
 
   /* Remove the padding we set earlier */
@@ -83,10 +83,15 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 30px;
+    margin-bottom: 0px;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
     border-bottom: 0;
   }
+}
+
+/* Dashboard Styling */
+.db-nav {
+  margin-left: 10;
 }
