@@ -28,48 +28,8 @@ angular.module('tabletopApp')
           };
   })
 
-  .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout) {
-    
-    //Load our user, in order to create restaurants for this user
-    $scope.user = user;
-    loadProfile(user);
-
-    function loadProfile(user) {
-      if( $scope.profile ) {
-        $scope.profile.$destroy();
-      }
-      fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
-    }
-
-		//PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
-    var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/'); 
-    // var callTableRef = $firebase(tableRef);
-
-    //Instantiating a new array for restaurants 
-    $scope.restaurants = []; 
-    //To identify when all restaurants are loaded to show them all in sync
-    $scope.restaurantsLoaded = false;
-
-		//Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
-    var j = 0;
-    tableRef.once('value', function(allSnapshot) {
-    		//For each restaurant in our DB
-        allSnapshot.forEach(function(restaurantSnapshot) {
-            var i = restaurantSnapshot.child('id').val();
-            if( i !== null ){
-            	// set database content into our restaurants array
-              $scope.restaurants[j] = restaurantSnapshot.val();
-            }
-
-            $scope.$apply($scope.restaurants);
-            console.log("Restaurant: " + j);    
-       });
-      console.log("Restaurants All Loaded");   
-      $scope.restaurantsLoaded = true;
-    });
-
-
-    // Changes the layout in dashboard
+  .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout, $firebase) {
+    // Changes the layout in dashboard when side-bar navigations are clicked
     $scope.mainShow = true;
     $scope.restaurantsShow = false;
     $scope.eventsShow = false;
@@ -92,6 +52,55 @@ angular.module('tabletopApp')
              $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = true;
          }
     }
+
+    //Load our current user, in order to create restaurants for this user
+    $scope.user = user;
+    loadProfile(user);
+
+    function loadProfile(user) {
+      if( $scope.profile ) {
+        $scope.profile.$destroy();
+      }
+      fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
+    }
+
+		//PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
+    // var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/');
+    var restaurantsRef = new Firebase('https://tabletopstaging.firebaseio.com/restaurants/');  
+    
+    var callRestaurantRef = $firebase(restaurantsRef); //<<< Constructor for firebase
+
+    // console.log(callRestaurantRef);
+
+    //Instantiating a new array for restaurants 
+    $scope.restaurants = []; 
+    //To identify when all restaurants are loaded to show them all in sync
+    $scope.restaurantsLoaded = false;
+
+		//Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
+    var j = 0;
+    restaurantsRef.once('value', function(allSnapshot) {
+    		//For each restaurant in our DB
+        console.log(allSnapshot);
+        allSnapshot.forEach(function(restaurantSnapshot) {
+            var i = restaurantSnapshot.child('id').val();
+            if( i !== null ){
+            	// set database content into our restaurants array
+              $scope.restaurants[j] = restaurantSnapshot.val();
+            }
+
+            $scope.$apply($scope.allSnapshot);
+            console.log("Restaurant: " + j);
+            console.log("Restaurant: " + $scope.restaurants);    
+       });
+      console.log("Restaurants All Loaded");   
+      $scope.restaurantsLoaded = true;
+    });
+
+    $scope.data = restaurantsRef.$asObject();
+
+    console.log('Array', $scope.restaurants);
+    // console.log('Object', $scope.data);
 
 
     //Refreshes the add restaurant modal everytime it is selected (clicked on).
