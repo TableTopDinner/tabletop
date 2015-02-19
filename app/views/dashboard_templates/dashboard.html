@@ -1,83 +1,95 @@
 <div id="wrapper">
 
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li>
-              <a ng-click="dashboardTemplateLoader('main')">
-                <span><i class="fa fa-tachometer" style="margin-right: 5px"></i></span>
-                Dashboard
-              </a>
-            </li>
-            <li>
-                <a ng-click="dashboardTemplateLoader('restaurants')">
-					<span><i class="fa fa-cutlery" style="margin-right: 5px"></i></span>
-					Restaurants</a>
-            </li>
-            <li>
-                <a ng-click="dashboardTemplateLoader('events')">
-					<span><i class="fa fa-calendar" style="margin-right: 5px"></i></span>
-					Events</a>
-            </li>
-            <li>
-                <a ng-click="dashboardTemplateLoader('analysis')">
-					<span><i class="fa fa-line-chart" style="margin-right: 5px"></i></span>
-					Analysis</a>
-            </li>
-            <li>
-                <a ng-click="dashboardTemplateLoader('payment')">
-					<span><i class="fa fa-dollar" style="margin-right: 5px"></i></span>
-					Payments</a>
-            </li>
-        </ul>
-    </div>
-    <!-- /#sidebar-wrapper -->
+  <!-- Sidebar -->
+  <div id="sidebar-wrapper">
+    <ul class="sidebar-nav">
+      <li>
+        <a ng-click="dashboardTemplateLoader('main')">
+          <span><i class="db-icon fa fa-tachometer"></i></span>
+          Dashboard
+        </a>
+      </li>
+      <li>
+        <a ng-click="dashboardTemplateLoader('restaurants')">
+          <span><i class="db-icon fa fa-cutlery"></i></span>
+          Restaurants
+        </a>
+      </li>
+      <li>
+        <a ng-click="dashboardTemplateLoader('events')">
+          <span><i class="db-icon fa fa-calendar"></i></span>
+          Events
+        </a>
+      </li>
+      <li>
+        <a ng-click="dashboardTemplateLoader('analysis')">
+          <span><i class="db-icon fa fa-line-chart"></i></span>
+          Analysis
+        </a>
+      </li>
+      <li>
+        <a ng-click="dashboardTemplateLoader('payments')">
+          <span><i class="db-icon fa fa-dollar"></i></span>
+          Payments
+        </a>
+      </li>
+      <li>
+        <a ng-click="dashboardTemplateLoader('locations')">
+          <span><i class="db-icon"></i></span>
+          Locations
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- /#sidebar-wrapper -->
 
-    <!-- Page Content -->
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">   
-              <!-- START Template Render -->
-                <div ng-show="mainShow">
-                  <div ng-include src="'views/dashboard_templates/main.html'"></div>
-                </div>
-                <div ng-show="restaurantsShow">
-                  <div ng-include src="'views/dashboard_templates/restaurants.html'"></div>
-                </div>
-                <div ng-show="eventsShow">
-                  <div ng-include src="'views/dashboard_templates/events.html'"></div>
-                </div>
-                <div ng-show="analysisShow">
-                  <div ng-include src="'views/dashboard_templates/payment.html'"></div>
-                </div>
-                <div ng-show="paymentsShow">
-                  <div ng-include src="'views/dashboard_templates/analysis.html'"></div>
-                </div>
-
-            </div>
+  <!-- Page Content -->
+  <div id="page-content-wrapper">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- START Template Render -->
+        <div ng-show="mainShow">
+          <div ng-include="'views/dashboard_templates/main.html'"></div>
         </div>
+        <div ng-show="restaurantsShow">
+          <div ng-include="'views/dashboard_templates/restaurants.html'"></div>
+        </div>
+        <div ng-show="eventsShow">
+          <div ng-include="'views/dashboard_templates/events.html'"></div>
+        </div>
+        <div ng-show="analysisShow">
+          <div ng-include="'views/dashboard_templates/analysis.html'"></div>
+        </div>
+        <div ng-show="paymentsShow">
+          <div ng-include="'views/dashboard_templates/payments.html'"></div>
+        </div>
+        <div ng-show="locationsShow">
+          <div ng-include="'views/dashboard_templates/locations.html'"></div>
+        </div>
+      </div>
     </div>
-    <!-- /#page-content-wrapper
+  </div>
+  <!-- /#page-content-wrapper
 
 </div>
 <!-- /#wrapper -->
 
-<!-- jQuery -->
-<script src="js/jquery.js"></script>
+  <!-- jQuery -->
+  <script src="js/jquery.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="js/bootstrap.min.js"></script>
+  <!-- Bootstrap Core JavaScript -->
+  <script src="js/bootstrap.min.js"></script>
 
-<!-- Menu Toggle Script -->
-<script>
-$("#menu-toggle").click(function(e) {
-    e.preventDefault();
-    $("#wrapper").toggleClass("toggled");
-});
-</script>
+  <!-- Menu Toggle Script -->
+  <script>
+    $("#menu-toggle").click(function (e) {
+      e.preventDefault();
+      $("#wrapper").toggleClass("toggled");
+    });
+  </script>
 
- <!-- <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('restaurants')">Restaurants</button>
-<button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('events')">Events</button>
-<button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('payment')">Payment</button>
-<button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('analysis')">Analysis</button>
-<button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('other')">Other</button> -->
+  <!-- <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('restaurants')">Restaurants</button>
+ <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('events')">Events</button>
+ <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('payment')">Payment</button>
+ <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('analysis')">Analysis</button>
+ <button type="button" class="btn btn-default" ng-click="dashboardTemplateLoader('other')">Other</button> -->
