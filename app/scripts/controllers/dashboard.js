@@ -74,7 +74,6 @@ angular.module('tabletopApp')
       $scope.restaurantsLoaded = true;
     });
 
-
     // $scope.dashboardTemplateLoader = function(template) {
     //   var template_dom_string = "<div ng-include src=\"\'views/dashboard_templates/" + template + ".html\'\"></div>"
 
@@ -87,26 +86,21 @@ angular.module('tabletopApp')
     $scope.restaurantsShow = false;
     $scope.eventsShow = false;
     $scope.analysisShow = false;
-    $scope.paymentShow = false;
-    $scope.locationShow = false;
+    $scope.paymentsShow = false;
+    $scope.locationsShow = false;
     $scope.dashboardTemplateLoader = function(template) {
          if(template === 'main') {
-             $scope.mainShow = true; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false; $scope.locationShow = false;
-         }
-         if(template === 'restaurants') {
-             $scope.mainShow = false; $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false; $scope.locationShow = false;
-         }
-         if(template === 'events') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentShow = false; $scope.locationShow = false;
-         }
-         if(template === 'analysis') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentShow = false; $scope.locationShow = false;
-         }
-         if(template === 'payments') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = true; $scope.locationShow = false;
-         }
-         if(template === 'locations') {
-             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentShow = false; $scope.locationShow = true;
+             $scope.mainShow = true; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = false; $scope.locationsShow = false;
+         } else if(template === 'restaurants') {
+             $scope.mainShow = false; $scope.restaurantsShow = true; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = false; $scope.locationsShow = false;
+         } else if(template === 'events') {
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = true; $scope.analysisShow = false; $scope.paymentsShow = false; $scope.locationsShow = false;
+         } else if(template === 'analysis') {
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = true; $scope.paymentsShow = false; $scope.locationsShow = false;
+         } else if(template === 'payments') {
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = true; $scope.locationsShow = false;
+         } else if(template === 'locations') {
+             $scope.mainShow = false; $scope.restaurantsShow = false; $scope.eventsShow = false; $scope.analysisShow = false; $scope.paymentsShow = false; $scope.locationsShow = true;
          }
     };
 
@@ -133,9 +127,9 @@ angular.module('tabletopApp')
 
     	//If no missing field errors continue
       try {
-          // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restuarant...</strong>";
-
+          // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restaurant...</strong>";
           var dataObject;
+
           if(result === true) {
               dataObject = {
                   'name' : $scope.selectedRestaurant.name, 'description': $scope.selectedRestaurant.description, 'type': $scope.selectedRestaurant.type, 'imgSrc': resizedImgSrcData, 'thumbSrc': resizedThumbSrcData, 'brand': $scope.selectedRestaurant.brand, 'region': $scope.selectedRestaurant.region, 'location': $scope.selectedRestaurant.location, 'contact': $scope.selectedRestaurant.contact, 'url': $scope.selectedRestaurant.url, 'status': $scope.selectedRestaurant.status, 'startDate': $scope.selectedRestaurant.startDate, 'endDate': $scope.selectedRestaurant.endDate, 'canvas': $scope.selectedRestaurant.canvas, 'hashtags': $scope.selectedRestaurant.hashtags, 'publish': true, 'id': addID, 'brandImgSrc': resizedBrandImgSrcData, 'brandThumbSrc': resizedBrandThumbSrcData

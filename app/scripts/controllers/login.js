@@ -24,13 +24,11 @@ angular.module('tabletopApp')
 
     $scope.createAccount = function(email, pass, confirm) {
       $scope.err = null;
-      if( !pass ) {
+      if(!pass) {
         $scope.err = 'Please enter a password';
-      }
-      else if( pass !== confirm ) {
+      } else if(pass !== confirm) {
         $scope.err = 'Passwords do not match';
-      }
-      else {
+      } else {
         simpleLogin.createAccount(email, pass/*, name*/)
           .then(function() {
             $location.path('/account');

@@ -75,9 +75,6 @@ angular.module('tabletopApp')
       .when('/contact', {
         templateUrl: 'views/contact.html'
       })
-      .when('/locations', {
-        templateUrl: 'views/locations.html'
-      })
       .whenAuthenticated('/dashboard', {
         templateUrl: 'views/dashboard_templates/dashboard.html',
         controller: 'DashboardCtrl'
