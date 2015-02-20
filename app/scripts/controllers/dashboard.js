@@ -35,7 +35,6 @@ angular.module('tabletopApp')
   })
 
   .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout) {
-
     //Load our user, in order to create restaurants for this user
     $scope.user = user;
     loadProfile(user);
@@ -104,6 +103,9 @@ angular.module('tabletopApp')
          }
     };
 
+    //Add the Google Maps object to the scope
+    $scope.map = { center: { latitude: 33.636453, longitude: -112.410736 }, zoom: 10 };
+
     //Refreshes the add restaurant modal everytime it is selected (clicked on).
     $scope.instantiateRestaurant = function(object) {
     	$scope.selectedRestaurant = {};
@@ -130,7 +132,7 @@ angular.module('tabletopApp')
           // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restaurant...</strong>";
           var dataObject;
 
-          if(result === true) {
+          if (result === true) {
               dataObject = {
                   'name' : $scope.selectedRestaurant.name, 'description': $scope.selectedRestaurant.description, 'type': $scope.selectedRestaurant.type, 'imgSrc': resizedImgSrcData, 'thumbSrc': resizedThumbSrcData, 'brand': $scope.selectedRestaurant.brand, 'region': $scope.selectedRestaurant.region, 'location': $scope.selectedRestaurant.location, 'contact': $scope.selectedRestaurant.contact, 'url': $scope.selectedRestaurant.url, 'status': $scope.selectedRestaurant.status, 'startDate': $scope.selectedRestaurant.startDate, 'endDate': $scope.selectedRestaurant.endDate, 'canvas': $scope.selectedRestaurant.canvas, 'hashtags': $scope.selectedRestaurant.hashtags, 'publish': true, 'id': addID, 'brandImgSrc': resizedBrandImgSrcData, 'brandThumbSrc': resizedBrandThumbSrcData
               };
@@ -143,9 +145,8 @@ angular.module('tabletopApp')
           fireRef.child(creatingID).set(dataObject);
           //wait 3000 milli secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restaurant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
-      }
-      //If there are missing field errors alert that silly restaurant owner
-      catch(err) {
+      } catch (err) {
+          //If there are missing field errors alert that silly restaurant owner
           $('#missingFieldError').show();
           spinner.stop();
           if (err.message === "Cannot read property 'name' of undefined") {
