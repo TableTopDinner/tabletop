@@ -101,6 +101,9 @@ body {
 }
 
 /* Locations Page Styling */
-.angular-google-map-container {
+#map_canvas {
+  margin: 0;
+  padding: 0;
   height: 800px;
+  border: 1px solid #ccc;
 }

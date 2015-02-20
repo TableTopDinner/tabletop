@@ -17,6 +17,5 @@ angular.module('tabletopApp', [
     'ngTouch',
     'firebase',
     'firebase.utils',
-    'simpleLogin',
-    'uiGmapgoogle-maps'
+    'simpleLogin'
   ]);
