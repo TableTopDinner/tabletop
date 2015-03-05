@@ -64,65 +64,71 @@
       <div class="row modalDetail">
         <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
           <div class="middle-align">
-            <h1 class="detailName">
-              <input type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
-            </h1>
-            <div class="detailDescription">
-              <textarea name="description" ng-model="selectedEvent.description" placeholder="Description"></textarea>
-            </div>
             <table class="detailTable table">
               <tbody>
                 <tr>
+                  <td class="bolder">Name</td>
+                  <td>
+                    <input class=form-control" type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Description</td>
+                  <td>
+                    <textarea class=form-control" name="description" ng-model="selectedEvent.description" placeholder="Description"></textarea>
+                  </td>
+                </tr>
+                <tr>
                   <td class="bolder">Status</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.status" name="status" placeholder="Previous, Active, or Upcoming">
+                    <input class=form-control" type="text" ng-model="selectedEvent.status" name="status" placeholder="Previous, Active, or Upcoming">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Brands</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.brand" name="brand" placeholder="Brand" >
+                    <input class=form-control" type="text" ng-model="selectedEvent.brand" name="brand" placeholder="Brand" >
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Type</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.type" name="type" placeholder="Type">
+                    <input class=form-control" type="text" ng-model="selectedEvent.type" name="type" placeholder="Type">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">URL</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.url" name="url" placeholder="URL">
+                    <input class=form-control" type="text" ng-model="selectedEvent.url" name="url" placeholder="URL">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Contact</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.contact" name="contact" placeholder="Contact">
+                    <input class=form-control" type="text" ng-model="selectedEvent.contact" name="contact" placeholder="Contact">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Location</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.location" name="location" placeholder="Location">
+                    <input class=form-control" type="text" ng-model="selectedEvent.location" name="location" placeholder="Location">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Start Date</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.startDate" name="startDate" placeholder="Start Date">
+                    <input class=form-control" type="text" ng-model="selectedEvent.startDate" name="startDate" placeholder="Start Date">
                   </td>
                 </tr><tr>
                   <td class="bolder">End Date</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.endDate" name="endDate" placeholder="End Date">
+                    <input class=form-control" type="text" ng-model="selectedEvent.endDate" name="endDate" placeholder="End Date">
                   </td>
                 </tr>
                 <tr>
                   <td class="bolder">Hashtags</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.hashtags" name="Hashtags" placeholder="Hashtags">
+                    <input class=form-control" type="text" ng-model="selectedEvent.hashtags" name="Hashtags" placeholder="Hashtags">
                   </td>
                 </tr>
               </tbody>
@@ -140,10 +146,10 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/ttplaceholder.png" class="img-responsive" id="panoAdd">
+            <!--<img src="../images/ttplaceholder.png" class="img-responsive" id="panoAdd">-->
               <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
               <span class="btn btn-default btn-file">
-                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                <input class="form-control" type="file" accept="image/*" capture="camera" id="file-upload-add">
               </span>
               <div id="spinAdd"></div>
         </div>
