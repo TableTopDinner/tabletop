@@ -38,6 +38,7 @@ angular.module('tabletopApp')
         $scope.$watch('locationsShow', function () {
           window.setTimeout(function(){
             google.maps.event.trigger(map, 'resize');
+            map.setCenter(center);
           },100);
         });
       }
