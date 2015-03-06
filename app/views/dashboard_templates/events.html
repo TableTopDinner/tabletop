@@ -7,7 +7,7 @@
   <!-- START Create New Event Selectable -->
   <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
     <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
-      <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
+      <img src="https://media.licdn.com/media/p/5/000/283/112/1959ca5.png" class="img-responsive card-img">
       <div class="card-header text-center">Create New Event</div>
       <div class="card-description">Click here to add a new Event!</div>
     </div>
@@ -15,7 +15,7 @@
   <!-- END Create New Event Selectable -->
 
   <!-- Example view -->
-  <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
+  <!-- <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
     <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
       <img src="../../images/tabletoplogo.png" class="img-responsive card-img">
       <div class="card-header text-center">Example 1</div>
@@ -28,20 +28,20 @@
       <div class="card-header text-center">Example 2</div>
       <div class="card-description">This is example 2!</div>
     </div>
-  </div>
+  </div> -->
 
   <!-- START previously created Events Selectable -->
   <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-repeat="event in events track by $index" ng-animate="'animate'">
-    <div class="card-background" ng-click="selectEvent(Event)" data-toggle="modal" data-target="#updateEventModal">
-      <img ng-src="{{Event.image}}" class="img-responsive card-img" >
-      <div class="card-header">{{Event.name}}</div>
-      <div class="card-description">{{Event.description | cut:true:105:'...'}}</div>
+    <div class="card-background" ng-click="selectEvent(event)" data-toggle="modal" data-target="#updateEventModal">
+      <img ng-src="{{event.image}}" class="img-responsive card-img" >
+      <div class="card-header">{{event.name}}</div>
+      <div class="card-description">{{event.description | cut:true:105:'...'}}</div>
     </div>
 
   </div>
   <!-- END previously created Events Selectable -->
 
-<!-- ************** SECTION: MAIN Event DISPLAY ************* -->
+<!-- ************** SECTION: MAIN Events DISPLAY ************* -->
 <!-- ************************************************************* -->
 
 
@@ -73,56 +73,21 @@
             <table class="detailTable table">
               <tbody>
                 <tr>
-                  <td class="bolder">Status</td>
+                  <td class="bolder">Restaurant</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.status" name="status" placeholder="Previous, Active, or Upcoming">
+                    <input type="text" ng-model="selectedEvent.restaurant" name="restaurant" placeholder="Restaurant">
                   </td>
                 </tr>
                 <tr>
-                  <td class="bolder">Brands</td>
+                  <td class="bolder">Date</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.brand" name="brand" placeholder="Brand" >
+                    <input type="text" ng-model="selectedEvent.date" name="Date" placeholder="00/00/00" >
                   </td>
                 </tr>
                 <tr>
-                  <td class="bolder">Type</td>
+                  <td class="bolder">Price</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.type" name="type" placeholder="Type">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">URL</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.url" name="url" placeholder="URL">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">Contact</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.contact" name="contact" placeholder="Contact">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">Location</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.location" name="location" placeholder="Location">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">Start Date</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.startDate" name="startDate" placeholder="Start Date">
-                  </td>
-                </tr><tr>
-                  <td class="bolder">End Date</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.endDate" name="endDate" placeholder="End Date">
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">Hashtags</td>
-                  <td>
-                    <input type="text" ng-model="selectedEvent.hashtags" name="Hashtags" placeholder="Hashtags">
+                    <input type="number" min="0" step="0.01" ng-model="selectedEvent.price" name="price" placeholder="$0.00">
                   </td>
                 </tr>
               </tbody>
@@ -140,7 +105,85 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/ttplaceholder.png" class="img-responsive" id="panoAdd"> 
+            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
+              <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
+              <span class="btn btn-default btn-file">
+                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+              </span>
+              <div id="spinAdd"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ************** SECTION: CREATE NEW Event MODAL ************* -->
+<!-- ***************************************************************** -->
+
+
+<!-- ***************************************************************** -->
+<!-- ************** SECTION: Already Created Event MODAL ************* -->
+
+<!-- START Already New Event Modal Template-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="createEventModal" id="createEventModal" aria-hidden="true">
+  <div class="modal-dialog modal-lg md-effect-1">
+
+    <div class="modal-content">
+
+      <div class="modal-dismiss">
+        <button type="button" class="close" data-dismiss="modal">
+          <span aria-hidden="true">&times;</span>
+          <span class="sr-only">Close</span>
+        </button>
+      </div>
+
+      <div class="row modalDetail">
+        <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
+          <div class="middle-allign">
+            <h1 class="detailName">
+              <input type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
+            </h1>
+            <div class="detailDescription">
+              <textarea name="description" ng-model="selectedEvent.description" placeholder="Description"></textarea>
+            </div>
+            <table class="detailTable table">
+              <tbody>
+                <tr>
+                  <td class="bolder">Restaurant</td>
+                  <td>
+                    <input type="text" ng-model="selectedEvent.restaurant" name="restaurant" placeholder="Restaurant">
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Date</td>
+                  <td>
+                    <input type="text" ng-model="selectedEvent.date" name="date" placeholder="00/00/00" >
+                  </td>
+                </tr>
+                <tr>
+                  <td class="bolder">Price</td>
+                  <td>
+                    <input type="number" min="0" step="0.01" ng-model="selectedEvent.price" name="date" placeholder="$0.00" >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+
+            <!-- START Error & Success Messages -->
+            <div class="text-center missingFieldError" id="missingFieldError"></div>
+            <!-- End Error & Success Messages -->
+
+            <div class="modalButtonGroup">
+              <button class="btn modalButton" ng-click="createEvent(selectedEvent)">Create</button>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
+            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
               <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
               <span class="btn btn-default btn-file">
                 <input type="file" accept="image/*" capture="camera" id="file-upload-add">

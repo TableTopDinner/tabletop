@@ -19,7 +19,7 @@
 					<span><i class="fa fa-calendar" style="margin-right: 5px"></i></span>
 					Events</a>
             </li>
-            <li>
+            <!-- <li>
                 <a ng-click="dashboardTemplateLoader('analysis')">
 					<span><i class="fa fa-line-chart" style="margin-right: 5px"></i></span>
 					Analysis</a>
@@ -28,6 +28,11 @@
                 <a ng-click="dashboardTemplateLoader('payments')">
 					<span><i class="fa fa-dollar" style="margin-right: 5px"></i></span>
 					Payments</a>
+            </li> -->
+            <li>
+                <a ng-click="dashboardTemplateLoader('locations')">
+                    <span><i class="fa fa-location-arrow" style="margin-right: 5px"></i></span>
+                    Locations</a>
             </li>
         </ul>
     </div>
@@ -52,6 +57,9 @@
                 </div>
                 <div ng-show="paymentsShow">
                   <div ng-include src="'views/dashboard_templates/payments.html'"></div>
+                </div>
+                <div ng-show="locationsShow">
+                  <div ng-include src="'views/dashboard_templates/locations.html'"></div>
                 </div>
 
             </div>
