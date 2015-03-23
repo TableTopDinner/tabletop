@@ -175,6 +175,18 @@ angular.module('tabletopApp')
           //         "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "address": $scope.selectedRestaurant.address, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "license": $scope.selectedRestaurant.license
           //     };
           // }
+          
+          // Uploading the Data here so AJAX for Restaurant Goes here
+          
+          $.ajax({
+             type: "POST",
+             dataType: "json",
+             url: "www.tabletopdine.com/insertRestaurant.php", //Relative or absolute path to response.php file
+             data: null,
+             success: function(data) {
+                     alert("Form submitted successfully.\nReturned json: " + data["json"]);
+             }
+           });
 
           restaurantsRef.child(creatingID).set(dataObject);
           location.reload();
@@ -206,6 +218,7 @@ angular.module('tabletopApp')
       // $scope.selectedRestaurant.name = ""; Name can not be empty
       $scope.selectedEvent.description = "";
       $scope.selectedEvent.restaurant = "";
+      $scope.selectedEvent.endDate = "";
       $scope.selectedEvent.price = "0";
       $scope.selectedEvent.image = "https://media.licdn.com/media/p/5/000/283/112/1959ca5.png";
       // $scope.selectedEvent.rID = ;
@@ -224,17 +237,38 @@ angular.module('tabletopApp')
           // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restuarant...</strong>";
           
 
+//enddate, amountSaved, 
 
           var dataObject;
           // if(result === true) {
           dataObject = {
-              "id": creatingID, "name" : $scope.selectedEvent.name, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "price": $scope.selectedEvent.price, "image": $scope.selectedEvent.image
+              "id": creatingID, "name" : $scope.selectedEvent.name, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "price": $scope.selectedEvent.price, "image": $scope.selectedEvent.image, "endDate": $scope.selectedEvent.endDate
           };
           // } else {
           //     dataObject = {
           //         "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "address": $scope.selectedRestaurant.address, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "license": $scope.selectedRestaurant.license
           //     };
           // }
+
+          // Uploading the Data here so AJAX for Events Goes here
+          var ajaxData = {
+            "postId": 2000,
+            "basePrice": $scope.selectedEvent.price, 
+            "amountSaved": $scope.selectedEvent.price,  
+            "highlights": $scope.selectedEvent.description
+          };
+          $.ajax({
+             type: "POST",
+             dataType: "json",
+             url: "www.tabletopdine.com/insertEvent.php", //Relative or absolute path to response.php file
+             data: ajaxData,
+             success: function(data) {
+                     alert("Form submitted successfully.\nReturned json: " + data["json"]);
+             },
+             error: function(XMLHttpRequest, textStatus, errorThrown) { 
+                   alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+               }
+           });
 
           eventsRef.child(creatingID).set(dataObject);
           console.log("Success?");
@@ -254,6 +288,12 @@ angular.module('tabletopApp')
           }
       }
     }
+
+    $scope.selectRestaurantAdd = function(restaurant) {
+      alert(restaurant.name);
+        document.getElementById("restaurantAddInput").value = restaurant.name;
+        $scope.selectedEvent.restaurant = restaurant.id; //can do restaurant.id
+    };
 
 
 }); //This is the end of the page dum dum dum (angular.module) ("'\(>.<)/") <-- "that is zach" 

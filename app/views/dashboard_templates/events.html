@@ -75,13 +75,40 @@
                 <tr>
                   <td class="bolder">Restaurant</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.restaurant" name="restaurant" placeholder="Restaurant">
+                    <!-- <input type="text" ng-model="selectedEvent.restaurant" name="restaurant" placeholder="Restaurant"> -->
+
+                    <!-- <input class="dropdown-toggle form-control" type="text" ng-model="query" name="restaurant" placeholder="Restaurant" value="{{restaurants[selectedEvent.restaurant].name}}" id="restaurantAddInput">
+
+                      <ul class="dropdown-menu" role="menu">
+                        <div ng-repeat="restaurant in restaurants">
+                          <li>
+                            <button class="btn btn-default dropDownButton" ng-click="selectRestaurantAdd(restaurant)">{{restaurant.name}}</button>
+                          </li>
+                        </div>
+                      </ul> -->
+
+
+                    <div class="btn-group" dropdown is-open="status.isopen">
+
+                      <input readonly class="dropdown-toggle form-control" type="text" name="restaurant" placeholder="Restaurant" value="{{restaurant[selectedEvent.restaurant].name}}" id="restaurantAddInput">
+
+                      <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                        Select <span class="caret"></span>
+                      </button>
+                      
+                      <ul class="dropdown-menu" role="menu">
+                        <div ng-repeat="restaurant in restaurants">
+                          <button class="btn btn-default dropDownButton" ng-click="selectRestaurantAdd(restaurant)">{{restaurant.name}}</button>
+                        </div>
+                      </ul>
+                    </div>
+
                   </td>
                 </tr>
                 <tr>
-                  <td class="bolder">Date</td>
+                  <td class="bolder">End Date</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.date" name="Date" placeholder="00/00/00" >
+                    <input type="text" ng-model="selectedEvent.endDate" name="endDate" placeholder="00/00/00" >
                   </td>
                 </tr>
                 <tr>
@@ -126,8 +153,8 @@
 <!-- ***************************************************************** -->
 <!-- ************** SECTION: Already Created Event MODAL ************* -->
 
-<!-- START Already New Event Modal Template-->
-<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="createEventModal" id="createEventModal" aria-hidden="true">
+<!-- START Already Created Event Modal Template-->
+<div class="modal fade bs-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="updateEventModal" id="updateEventModal" aria-hidden="true">
   <div class="modal-dialog modal-lg md-effect-1">
 
     <div class="modal-content">
@@ -157,9 +184,9 @@
                   </td>
                 </tr>
                 <tr>
-                  <td class="bolder">Date</td>
+                  <td class="bolder">End Date</td>
                   <td>
-                    <input type="text" ng-model="selectedEvent.date" name="date" placeholder="00/00/00" >
+                    <input type="text" ng-model="selectedEvent.endDate" name="date" placeholder="00/00/00" >
                   </td>
                 </tr>
                 <tr>

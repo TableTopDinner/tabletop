@@ -17,5 +17,6 @@ angular.module('tabletopApp', [
     'ngTouch',
     'firebase',
     'firebase.utils',
-    'simpleLogin'
+    'simpleLogin',
+    'ui.bootstrap'
   ]);
