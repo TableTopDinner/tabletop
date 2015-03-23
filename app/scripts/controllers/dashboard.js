@@ -70,7 +70,7 @@ angular.module('tabletopApp')
       fbutil.syncObject('users/'+user.uid).$bindTo($scope, 'profile');
     }
 
-		//PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
+    //PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
     // var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/');
     var restaurantsRef = new Firebase('https://tabletopstaging.firebaseio.com/restaurants/');  
     var callRestaurantRef = $firebase(restaurantsRef); //<<< Constructor for firebase
@@ -89,15 +89,15 @@ angular.module('tabletopApp')
     $scope.restaurantsLoaded = false;
     $scope.eventsLoaded = false;
 
-		//Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
+    //Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
     restaurantsRef.once('value', function(allSnapshot) {
-    		//For each restaurant in our DB
+        //For each restaurant in our DB
         allSnapshot.forEach(function(restaurantSnapshot) {
             var i = restaurantSnapshot.child('id').val();
             var u = restaurantSnapshot.child('userID').val(); //var to create array of only the values with correct current user's id 
 
             if( i !== null && u === user.id){
-            	// set database content into our restaurants array
+              // set database content into our restaurants array
               $scope.restaurants[i] = restaurantSnapshot.val();
             }
 
@@ -132,7 +132,7 @@ angular.module('tabletopApp')
 
     //Refreshes the add restaurant modal everytime it is selected (clicked on).
     $scope.instantiateRestaurant = function() {
-    	$scope.selectedRestaurant = {};
+      $scope.selectedRestaurant = {};
       // $scope.selectedRestaurant.name = ""; Name can not be empty
       $scope.selectedRestaurant.description = "";
       $scope.selectedRestaurant.type = ""; //Types: BBQ, Steakhouse, Bar and Grill, Italian, Wine Bar, Mexican
@@ -158,10 +158,10 @@ angular.module('tabletopApp')
     //Called when 'Create' button is pressed within the Create New Restaurant modal
     $scope.createRestaurant = function() {
 
-    	//The new restaurant about to be created will always be added to the end of the array
-    	var creatingID = $scope.restaurants.length;
+      //The new restaurant about to be created will always be added to the end of the array
+      var creatingID = $scope.restaurants.length;
 
-    	//If no missing field errors continue
+      //If no missing field errors continue
       try {
           // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restuarant...</strong>";
 
@@ -297,8 +297,3 @@ angular.module('tabletopApp')
 
 
 }); //This is the end of the page dum dum dum (angular.module) ("'\(>.<)/") <-- "that is zach" 
-
-
-
-
-//************************************** ANALYSIS **************************************??

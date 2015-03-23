@@ -65,29 +65,24 @@ angular.module('tabletopApp')
       //   templateUrl: 'views/main.html',
       //   controller: 'MainCtrl'
       // })
-
       .when('/login', {
         templateUrl: 'views/login.html',
         controller: 'LoginCtrl'
       })
-
       .when('/about', {
         templateUrl: 'views/about.html'
       })
       .when('/contact', {
         templateUrl: 'views/contact.html'
       })
-
       .whenAuthenticated('/dashboard', {
         templateUrl: 'views/dashboard_templates/dashboard.html',
         controller: 'DashboardCtrl'
       })
-
       .whenAuthenticated('/account', {
         templateUrl: 'views/account.html',
         controller: 'AccountCtrl'
       })
-
       .when('/chat', {
         templateUrl: 'views/chat.html',
         controller: 'ChatCtrl'

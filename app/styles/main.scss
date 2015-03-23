@@ -83,7 +83,7 @@ body {
   }
   /* Space out the masthead */
   .header {
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
   /* Remove the bottom border on the jumbotron for visual effect */
   .jumbotron {
@@ -93,7 +93,19 @@ body {
 
 /* Dashboard Styling */
 .db-nav {
-  margin-left: 10;
+  margin-left: 10px;
+}
+
+.db-icon {
+  margin-right:5px;
+}
+
+/* Locations Page Styling */
+#map_canvas {
+  margin: 0;
+  padding: 0;
+  height: 800px;
+  border: 1px solid #ccc;
 }
 
 /* Locations Page Styling */
