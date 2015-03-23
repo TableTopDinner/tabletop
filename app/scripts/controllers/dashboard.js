@@ -28,7 +28,7 @@ angular.module('tabletopApp')
           };
   })
 
-  .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout, $firebase) {
+  .controller('DashboardCtrl', function ($scope, user, fbutil, $timeout, $firebase, $http) {
     // Changes the layout in dashboard when side-bar navigations are clicked
     $scope.mainShow = true;
     $scope.restaurantsShow = false;
@@ -177,16 +177,42 @@ angular.module('tabletopApp')
           // }
           
           // Uploading the Data here so AJAX for Restaurant Goes here
-          
-          $.ajax({
-             type: "POST",
-             dataType: "json",
-             url: "www.tabletopdine.com/insertRestaurant.php", //Relative or absolute path to response.php file
-             data: null,
-             success: function(data) {
-                     alert("Form submitted successfully.\nReturned json: " + data["json"]);
-             }
-           });
+
+          var restAjaxData = {
+            "postId": 2000,
+            "editLock": null,
+            "editLast": null,
+            "contactName": "Cory Is Cool",
+            "contactTitle": "Cory Sorry",
+            "contactStreet": null,
+            "contactState": null,
+            "contactPostalCode": null,
+            "contactCountry": null,
+            "contactPhone": null,
+            "website": null,
+            "facebook": null,
+            "twitter": null,
+            "wpAttachedFile": null,
+            "wpAttachmentMetaData": null
+          };
+
+          // $.ajax({
+          //    type: "GET",
+          //    dataType: "jsonp",
+          //    crossDomain: true,
+          //    url: "http://postbin.hackyon.com/6573FC1D11", //Relative or absolute path to response.php file
+          //    data: restAjaxData
+          //  }).done(function (response) {
+          //      if (response.success) {
+          //          alert('Saved!');
+          //      } else {
+          //          alert('Some error occurred.');
+          //      }
+          //     });
+            
+          // $http.post( "http://postbin.hackyon.com/6573FC1D11", restAjaxData );
+
+          $http.jsonp( "http://www.tabletopdine.com/insertRestaurant.php?callback=JSON_CALLBACK&data=" + restAjaxData);
 
           restaurantsRef.child(creatingID).set(dataObject);
           location.reload();
@@ -251,7 +277,7 @@ angular.module('tabletopApp')
           // }
 
           // Uploading the Data here so AJAX for Events Goes here
-          var ajaxData = {
+          var eventAjaxData = {
             "postId": 2000,
             "basePrice": $scope.selectedEvent.price, 
             "amountSaved": $scope.selectedEvent.price,  
@@ -261,13 +287,13 @@ angular.module('tabletopApp')
              type: "POST",
              dataType: "json",
              url: "www.tabletopdine.com/insertEvent.php", //Relative or absolute path to response.php file
-             data: ajaxData,
+             data: eventAjaxData,
              success: function(data) {
                      alert("Form submitted successfully.\nReturned json: " + data["json"]);
              },
              error: function(XMLHttpRequest, textStatus, errorThrown) { 
                    alert("Status: " + textStatus); alert("Error: " + errorThrown); 
-               }
+             }
            });
 
           eventsRef.child(creatingID).set(dataObject);
