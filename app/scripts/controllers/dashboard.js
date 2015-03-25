@@ -72,18 +72,18 @@ angular.module('tabletopApp')
 
     //PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
     // var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/');
-    var restaurantsRef = new Firebase('https://tabletopstaging.firebaseio.com/restaurants/');  
+    var restaurantsRef = new Firebase('https://tabletopstaging.firebaseio.com/restaurants/');
     var callRestaurantRef = $firebase(restaurantsRef); //<<< Constructor for firebase
 
-    var eventsRef = new Firebase('https://tabletopstaging.firebaseio.com/events/');  
+    var eventsRef = new Firebase('https://tabletopstaging.firebaseio.com/events/');
     var callEventRef = $firebase(eventsRef); //<<< Constructor for firebase
 
     // console.log(callRestaurantRef);
 
-    //Instantiating a new array for restaurants 
-    $scope.restaurants = []; 
-    //Instantiating a new array for restaurants 
-    $scope.events = []; 
+    //Instantiating a new array for restaurants
+    $scope.restaurants = [];
+    //Instantiating a new array for restaurants
+    $scope.events = [];
 
     //To identify when all restaurants are loaded to show them all in sync
     $scope.restaurantsLoaded = false;
@@ -94,7 +94,7 @@ angular.module('tabletopApp')
         //For each restaurant in our DB
         allSnapshot.forEach(function(restaurantSnapshot) {
             var i = restaurantSnapshot.child('id').val();
-            var u = restaurantSnapshot.child('userID').val(); //var to create array of only the values with correct current user's id 
+            var u = restaurantSnapshot.child('userID').val(); //var to create array of only the values with correct current user's id
 
             if( i !== null && u === user.id){
               // set database content into our restaurants array
@@ -104,7 +104,7 @@ angular.module('tabletopApp')
             $scope.$apply($scope.restaurants);
             console.log("Restaurant: " + i);
        });
-      console.log("All restaurants loaded after this call");   
+      console.log("All restaurants loaded after this call");
       $scope.restaurantsLoaded = true;
       console.log('Array', $scope.restaurants);
     });
@@ -124,7 +124,7 @@ angular.module('tabletopApp')
             $scope.$apply($scope.events);
             console.log("Event: " + i);
        });
-      console.log("All events loaded after this call");   
+      console.log("All events loaded after this call");
       $scope.eventsLoaded = true;
       console.log('Array', $scope.events);
     });
@@ -145,7 +145,7 @@ angular.module('tabletopApp')
       $scope.selectedRestaurant.email = "";
       $scope.selectedRestaurant.phoneNum = "";
       $scope.selectedRestaurant.userID = user.id;
-      
+
       //Removes alerts if there previously
       document.getElementById("missingFieldError").innerHTML = "";
     }
@@ -175,7 +175,7 @@ angular.module('tabletopApp')
           //         "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "address": $scope.selectedRestaurant.address, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "license": $scope.selectedRestaurant.license
           //     };
           // }
-          
+
           // Uploading the Data here so AJAX for Restaurant Goes here
 
           var restAjaxData = {
@@ -196,27 +196,28 @@ angular.module('tabletopApp')
             "wpAttachmentMetaData": null
           };
 
-          // $.ajax({
-          //    type: "GET",
-          //    dataType: "jsonp",
-          //    crossDomain: true,
-          //    url: "http://postbin.hackyon.com/6573FC1D11", //Relative or absolute path to response.php file
-          //    data: restAjaxData
-          //  }).done(function (response) {
-          //      if (response.success) {
-          //          alert('Saved!');
-          //      } else {
-          //          alert('Some error occurred.');
-          //      }
-          //     });
-            
+          $.ajax({
+              type: "GET",
+              dataType: "jsonp",
+              crossDomain: true,
+              contentType: "application/x-www-form-urlencoded",
+              url: "http://www.tabletopdine.com/insertRestaurant.php",
+              data: restAjaxData
+            }).done(function (response) {
+                if (response.success) {
+                    alert('Saved!');
+                } else {
+                    alert('Some error occurred.');
+                }
+               });
+
           // $http.post( "http://postbin.hackyon.com/6573FC1D11", restAjaxData );
 
-          $http.jsonp( "http://www.tabletopdine.com/insertRestaurant.php?callback=JSON_CALLBACK&data=" + restAjaxData);
+          //$http.jsonp( "http://www.tabletopdine.com/insertRestaurant.php?callback=JSON_CALLBACK&data=" + restAjaxData);
 
           restaurantsRef.child(creatingID).set(dataObject);
           location.reload();
-          //wait 3000 mili secs as default to give time to load image. 
+          //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
       }
       //If there are missing field errors alert that silly reatuarnt owner
@@ -225,7 +226,7 @@ angular.module('tabletopApp')
           alert(err);
           if ( err.message === "Cannot read property 'name' of undefined") {
               document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-danger'> <strong>Hey you mighty reatuarnt owner!</strong> Please give your restaurant a name.";
-          } 
+          }
           if ( err.message === "Firebase.set failed: First argument contains undefined in property 'name'") {
               document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-danger'> <strong>Hey you mighty reatuarnt owner!</strong> Please give your res a name.";
           }
@@ -248,7 +249,7 @@ angular.module('tabletopApp')
       $scope.selectedEvent.price = "0";
       $scope.selectedEvent.image = "https://media.licdn.com/media/p/5/000/283/112/1959ca5.png";
       // $scope.selectedEvent.rID = ;
-      
+
       //Removes alerts if there previously
       document.getElementById("missingFieldError").innerHTML = "";
     }
@@ -261,9 +262,9 @@ angular.module('tabletopApp')
       //If no missing field errors continue
       try {
           // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restuarant...</strong>";
-          
 
-//enddate, amountSaved, 
+
+//enddate, amountSaved,
 
           var dataObject;
           // if(result === true) {
@@ -279,8 +280,8 @@ angular.module('tabletopApp')
           // Uploading the Data here so AJAX for Events Goes here
           var eventAjaxData = {
             "postId": 2000,
-            "basePrice": $scope.selectedEvent.price, 
-            "amountSaved": $scope.selectedEvent.price,  
+            "basePrice": $scope.selectedEvent.price,
+            "amountSaved": $scope.selectedEvent.price,
             "highlights": $scope.selectedEvent.description
           };
           $.ajax({
@@ -291,15 +292,15 @@ angular.module('tabletopApp')
              success: function(data) {
                      alert("Form submitted successfully.\nReturned json: " + data["json"]);
              },
-             error: function(XMLHttpRequest, textStatus, errorThrown) { 
-                   alert("Status: " + textStatus); alert("Error: " + errorThrown); 
+             error: function(XMLHttpRequest, textStatus, errorThrown) {
+                   alert("Status: " + textStatus); alert("Error: " + errorThrown);
              }
            });
 
           eventsRef.child(creatingID).set(dataObject);
           console.log("Success?");
           location.reload();
-          //wait 3000 mili secs as default to give time to load image. 
+          //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
       }
       //If there are missing field errors alert that silly reatuarnt owner
@@ -308,7 +309,7 @@ angular.module('tabletopApp')
           alert(err);
           if ( err.message === "Cannot read property 'name' of undefined") {
               document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-danger'> <strong>Hey you mighty reatuarnt owner!</strong> Please give your event a name.";
-          } 
+          }
           if ( err.message === "Firebase.set failed: First argument contains undefined in property 'name'") {
               document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-danger'> <strong>Hey you mighty reatuarnt owner!</strong> Please give your event a name.";
           }
@@ -322,4 +323,4 @@ angular.module('tabletopApp')
     };
 
 
-}); //This is the end of the page dum dum dum (angular.module) ("'\(>.<)/") <-- "that is zach" 
+}); //This is the end of the page dum dum dum (angular.module) ("'\(>.<)/") <-- "that is zach"
