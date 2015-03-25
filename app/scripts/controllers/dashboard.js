@@ -197,8 +197,8 @@ angular.module('tabletopApp')
           };
 
           $.ajax({
-              type: "GET",
-              dataType: "jsonp",
+              type: "POST",
+              dataType: "json",
               crossDomain: true,
               contentType: "application/x-www-form-urlencoded",
               url: "http://www.tabletopdine.com/insertRestaurant.php",
