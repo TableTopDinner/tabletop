@@ -178,13 +178,14 @@ angular.module('tabletopApp')
 
           // Uploading the Data here so AJAX for Restaurant Goes here
 
-          var restAjaxData = {
-            "postId": 2000,
+          var restaurantData = {
+            "postId": 2001,
             "editLock": null,
             "editLast": null,
-            "contactName": "Cory Is Cool",
-            "contactTitle": "Cory Sorry",
+            "contactName": "Cory Is AWESOME",
+            "contactTitle": "Good Cory",
             "contactStreet": null,
+            "contactCity": null,
             "contactState": null,
             "contactPostalCode": null,
             "contactCountry": null,
@@ -196,20 +197,49 @@ angular.module('tabletopApp')
             "wpAttachmentMetaData": null
           };
 
-          $.ajax({
-              type: "POST",
-              dataType: "json",
-              crossDomain: true,
-              contentType: "application/x-www-form-urlencoded",
-              url: "http://www.tabletopdine.com/insertRestaurant.php",
-              data: restAjaxData
-            }).done(function (response) {
-                if (response.success) {
-                    alert('Saved!');
-                } else {
-                    alert('Some error occurred.');
-                }
-               });
+          /*
+           data={
+           "postId": 1208,
+           "editLock": null,
+           "editLast": null,
+           "contactName": "Cory Is Cool",
+           "contactTitle": "Cory Sorry",
+           "contactStreet": null,
+           "contactCity": null,
+           "contactState": null,
+           "contactPostalCode": null,
+           "contactCountry": null,
+           "contactPhone": null,
+           "website": null,
+           "facebook": null,
+           "twitter": null,
+           "wpAttachedFile": null,
+           "wpAttachmentMetaData": null
+           };
+           */
+
+          //var xmlhttp = new XMLHttpRequest();
+          //xmlhttp.open("GET", "http://www.tabletopdine.com/insertRestaurant.php?data="+JSON.stringify(restaurantData));
+          //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+
+          //$.ajax({
+          //    type: "POST",
+          //    dataType: "json",
+          //    crossDomain: true,
+          //    contentType: "application/x-www-form-urlencoded",
+          //    url: "/insertRestaurant.php",
+          //    data: restaurantData
+          //  }).done(function (response) {
+          //      if (response.success) {
+          //          alert('Saved!');
+          //      } else {
+          //          alert('Some error occurred.');
+          //      }
+          //     });
+
+        $.post("insertRestaurant.php", {"data": restaurantData}, function(response) {
+          alert('DONE');
+        });
 
           // $http.post( "http://postbin.hackyon.com/6573FC1D11", restAjaxData );
 
