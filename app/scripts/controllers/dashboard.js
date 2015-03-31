@@ -71,7 +71,7 @@ angular.module('tabletopApp')
     }
 
     //PRODUCTION DB:'https://tabletopdinner.firebaseio.com/' ||| STAGING DB:'https://tabletopstaging.firebaseio.com/'
-    // var tableRef = new Firebase('https://tabletopstaging.firebaseio.com/');
+    var tabletopRef = new Firebase('https://tabletopstaging.firebaseio.com/');
     var restaurantsRef = new Firebase('https://tabletopstaging.firebaseio.com/restaurants/');
     var callRestaurantRef = $firebase(restaurantsRef); //<<< Constructor for firebase
 
@@ -89,26 +89,39 @@ angular.module('tabletopApp')
     $scope.restaurantsLoaded = false;
     $scope.eventsLoaded = false;
 
-    //Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
-    restaurantsRef.once('value', function(allSnapshot) {
-        //For each restaurant in our DB
-        allSnapshot.forEach(function(restaurantSnapshot) {
-            var i = restaurantSnapshot.child('id').val();
-            var u = restaurantSnapshot.child('userID').val(); //var to create array of only the values with correct current user's id
+    // Taking a `snapshot` or `image` of our database stored in the `tableRef` reference to use in our app
+    // restaurantsRef.once('value', function(allSnapshot) {
+    //     //For each restaurant in our DB
+    //     allSnapshot.forEach(function(restaurantSnapshot) {
+    //         var i = restaurantSnapshot.child('id').val();
+    //         var u = restaurantSnapshot.child('userID').val(); //var to create array of only the values with correct current user's id
 
-            if( i !== null && u === user.id){
-              // set database content into our restaurants array
-              $scope.restaurants[i] = restaurantSnapshot.val();
-            }
+    //         if( u === user.id){
+    //           // set database content into our restaurants array
+    //           $scope.restaurants[i] = restaurantSnapshot.val();
+    //         }
 
-            $scope.$apply($scope.restaurants);
-            console.log("Restaurant: " + i);
-       });
+    //         $scope.$apply($scope.restaurants);
+    //         console.log("Restaurant: " + i);
+    //    });
+
+    //   console.log("All restaurants loaded after this call");
+    //   $scope.restaurantsLoaded = true;
+    //   console.log('Array', $scope.restaurants);
+    // });
+
+    restaurantsRef.once("value", function(snapshot) {
+      snapshot.forEach(function(data) {
+        if (data.val().userID === user.id) {
+                $scope.restaurants.push(data.val());
+        }
+      });
       console.log("All restaurants loaded after this call");
       $scope.restaurantsLoaded = true;
-      console.log('Array', $scope.restaurants);
+      console.log('RestaurantObjests:', $scope.restaurants);
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
     });
-
 
     eventsRef.once('value', function(allSnapshot) {
         //For each restaurant in our DB
@@ -155,11 +168,12 @@ angular.module('tabletopApp')
        $scope.selectedRestaurant = object;
     };
 
+
     //Called when 'Create' button is pressed within the Create New Restaurant modal
     $scope.createRestaurant = function() {
 
       //The new restaurant about to be created will always be added to the end of the array
-      var creatingID = $scope.restaurants.length;
+      // var creatingID = $scope.restaurants.length;
 
       //If no missing field errors continue
       try {
@@ -168,7 +182,7 @@ angular.module('tabletopApp')
           var dataObject;
           // if(result === true) {
           dataObject = {
-              "id": creatingID, "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "type": $scope.selectedRestaurant.type, "website": $scope.selectedRestaurant.website, "address1": $scope.selectedRestaurant.address1, "address2": $scope.selectedRestaurant.address2, "city": $scope.selectedRestaurant.city, "state": $scope.selectedRestaurant.state, "zipcode": $scope.selectedRestaurant.zipcode, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "userID": $scope.selectedRestaurant.userID
+              "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "type": $scope.selectedRestaurant.type, "website": $scope.selectedRestaurant.website, "address1": $scope.selectedRestaurant.address1, "address2": $scope.selectedRestaurant.address2, "city": $scope.selectedRestaurant.city, "state": $scope.selectedRestaurant.state, "zipcode": $scope.selectedRestaurant.zipcode, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "userID": $scope.selectedRestaurant.userID
           };
           // } else {
           //     dataObject = {
@@ -177,40 +191,44 @@ angular.module('tabletopApp')
           // }
 
           // Uploading the Data here so AJAX for Restaurant Goes here
-          var restAjaxData = {
-            "postId": 2000,
-            "editLock": null,
-            "editLast": null,
-            "contactName": "Cory Is Cool",
-            "contactTitle": "Cory Sorry",
-            "contactStreet": null,
-            "contactState": null,
-            "contactPostalCode": null,
-            "contactCountry": null,
-            "contactPhone": null,
-            "website": null,
-            "facebook": null,
-            "twitter": null,
-            "wpAttachedFile": null,
-            "wpAttachmentMetaData": null
-          };
+          // var restAjaxData = {
+          //   "postId": 2000,
+          //   "editLock": null,
+          //   "editLast": null,
+          //   "contactName": "Cory Is Cool",
+          //   "contactTitle": "Cory Sorry",
+          //   "contactStreet": null,
+          //   "contactState": null,
+          //   "contactPostalCode": null,
+          //   "contactCountry": null,
+          //   "contactPhone": null,
+          //   "website": null,
+          //   "facebook": null,
+          //   "twitter": null,
+          //   "wpAttachedFile": null,
+          //   "wpAttachmentMetaData": null
+          // };
 
-          $.ajax({
-              type: "POST",
-              dataType: "json",
-              crossDomain: true,
-              contentType: "application/x-www-form-urlencoded",
-              url: "http://www.tabletopdine.com/insertRestaurant.php",
-              data: restAjaxData
-            }).done(function (response) {
-                if (response.success) {
-                    alert('Saved!');
-                } else {
-                    alert('Some error occurred.');
-                }
-               });
+          // $.ajax({
+          //     type: "POST",
+          //     dataType: "json",
+          //     crossDomain: true,
+          //     contentType: "application/x-www-form-urlencoded",
+          //     url: "http://www.tabletopdine.com/insertRestaurant.php",
+          //     data: restAjaxData
+          //   }).done(function (response) {
+          //       if (response.success) {
+          //           alert('Saved!');
+          //       } else {
+          //           alert('Some error occurred.');
+          //       }
+          //      });
 
-          restaurantsRef.child(creatingID).set(dataObject);
+          // restaurantsRef.child(creatingID).set(dataObject);
+
+          restaurantsRef.push(dataObject);
+          // var restaurantID = restaurantsRef.key();
+
           location.reload();
           //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
