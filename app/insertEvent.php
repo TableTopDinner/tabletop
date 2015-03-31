@@ -14,6 +14,7 @@ const PASSWORD = "Tabletop1!";
 const DB_NAME = "tabletop_wp1";
 
 // Define the Keys used in the array
+const KEY_TITLE = "postTitle";
 const KEY_POST_ID = "postId";
 const KEY_EXPIRATION_DATE = "expirationDate";
 const KEY_BASE_PRICE = "basePrice";
@@ -59,7 +60,7 @@ $array = array();
 $array['success'] = false;
 
 // Access the Post data
-$data = (array) json_decode($_POST['data']);
+$data = $_POST;
 
 if ($data == null) {
 	echo ("ERROR: DATA NULL\n");
@@ -83,6 +84,12 @@ if ($conn->connect_error) {
 mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Event Queries
+$deletePostQuery = "DELETE FROM wp_post WHERE post_id = ?";
+$insertPostQuery = "INSERT INTO wp_post(post_author post_date, post_date_gmt, post_content, post_title, post_excerpt,
+          post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged,
+          post_modified, post_modified_gmt, post_content_filtered, post_parent, guid, menu_order,
+          post_type, post_mime_type, comment_count)";
+
 $deleteQuery = "DELETE FROM wp_postmeta WHERE post_id = ?";
 $insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_expiration_date', ?),
@@ -122,14 +129,71 @@ $thumbnailQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_wp_attached_file', ?),
 					(?, '_wp_attachment_metadata', ?)";
 
-//echo "DELETING PREVIOUS META DATA<br>";
-
 // Delete current post meta data
 $stmt = $conn->prepare($deleteQuery);
 $stmt->bind_param("i", $data[KEY_POST_ID]);
 $stmt->execute();
 
-//echo "INSERTING NEW META DATA<br>";
+// Delete current post data
+$stmt = $conn->prepare($deletePostQuery);
+$stmt->bind_param("i", $data[KEY_POST_ID]);
+$stmt->execute();
+
+// Insert new post data
+$stmt = $conn->prepare($insertPostQuery);
+$stmt->bind_param("isssssssssssssssisissi"
+  AUTHOR_ID,
+  $today->format("Y-m-d H:i:s"),
+  $today->format("Y-m-d H:i:s"),
+  null,
+  $data[KEY_TITLE],
+  null,
+  "publish",
+  "open",
+  "open",
+  null,
+  create_slug($data[KEY_TITLE],
+  null,
+  null,
+  $today->format("Y-m-d H:i:s"),
+  $today->format("Y-m-d H:i:s"),
+  null,
+  0,
+  "http://www.tabletopdine.com/dev/",
+  0,
+  "wg_merchant",
+  null,
+  0
+);
+$stmt->execute();
+
+// Insert new post data for revision row
+$stmt = $conn->prepare($insertPostQuery);
+$stmt->bind_param("isssssssssssssssisissi"
+  AUTHOR_ID,
+  $today->format("Y-m-d H:i:s"),
+  $today->format("Y-m-d H:i:s"),
+  null,
+  $data[KEY_TITLE],
+  null,
+  "inherit",
+  "open",
+  "open",
+  null,
+  "revision-v1",
+  null,
+  null,
+  $today->format("Y-m-d H:i:s"),
+  $today->format("Y-m-d H:i:s"),
+  null,
+  0,
+  "http://www.tabletopdine.com/dev/revision-v-1",
+  0,
+  "wg_merchant",
+  null,
+  0
+);
+$stmt->execute();
 
 // Insert new post meta data
 $stmt = $conn->prepare($insertQuery);
