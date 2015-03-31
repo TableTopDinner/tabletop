@@ -7,6 +7,11 @@ header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-W
 var_dump($_POST);
 die();
 
+function create_slug($string){
+   $slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);
+   return $slug;
+}
+
 // Define the Database connection
 const SERVER_NAME = "160.153.93.162";
 const USER_NAME = "tabletop_fb";
