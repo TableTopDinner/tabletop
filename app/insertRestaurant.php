@@ -12,9 +12,6 @@ function create_slug($string){
    return $slug;
 }
 
-// Define constants for table rows
-const AUTHOR_ID = 1;
-
 // Define the Database connection
 const SERVER_NAME = "160.153.93.162";
 const USER_NAME = "tabletop_fb";
@@ -39,6 +36,9 @@ const KEY_FACEBOOK = "facebook";
 const KEY_TWITTER = "twitter";
 const KEY_WP_ATTACHED_FILE = "wpAttachedFile";
 const KEY_WP_ATTACHMENT_METADATA = "wpAttachmentMetaData";
+
+// Define the standard fields
+const AUTHOR_ID = 1;
 
 $today = new DateTime("NOW");
 
@@ -70,6 +70,7 @@ if ($conn->connect_error) {
 mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Restaurant Queries
+$selectIdQuery = "SELECT TOP 1 post_id FROM wp_post ORDER BY post_id DESC";
 $deletePostQuery = "DELETE FROM wp_post WHERE post_id = ?";
 $insertPostQuery = "INSERT INTO wp_post(post_author post_date, post_date_gmt, post_content, post_title, post_excerpt,
           post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged,
@@ -96,6 +97,13 @@ $thumbnailMetaDataQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value
 					(?, '_wp_attached_file', ?),
 					(?, '_wp_attachment_metadata', ?)";
 
+/*
+if ($result = $conn->query($selectIdQuery) {
+  var_dump($result);
+  die();
+}
+*/
+
 // Delete current post meta data
 $stmt = $conn->prepare($deleteMetadataQuery);
 $stmt->bind_param("i", $data[KEY_POST_ID]);
@@ -108,7 +116,7 @@ $stmt->execute();
 
 // Insert new post data
 $stmt = $conn->prepare($insertPostQuery);
-$stmt->bind_param("isssssssssssssssisissi"
+$stmt->bind_param("isssssssssssssssisissi",
   AUTHOR_ID,
   $today->format("Y-m-d H:i:s"),
   $today->format("Y-m-d H:i:s"),
@@ -136,7 +144,7 @@ $stmt->execute();
 
 // Insert new post data for revision row
 $stmt = $conn->prepare($insertPostQuery);
-$stmt->bind_param("isssssssssssssssisissi"
+$stmt->bind_param("isssssssssssssssisissi",
   AUTHOR_ID,
   $today->format("Y-m-d H:i:s"),
   $today->format("Y-m-d H:i:s"),

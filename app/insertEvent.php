@@ -89,6 +89,7 @@ if ($conn->connect_error) {
 mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Event Queries
+$selectIdQuery = "SELECT TOP 1 post_id FROM wp_post ORDER BY post_id DESC";
 $deletePostQuery = "DELETE FROM wp_post WHERE post_id = ?";
 $insertPostQuery = "INSERT INTO wp_post(post_author post_date, post_date_gmt, post_content, post_title, post_excerpt,
           post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged,
@@ -133,6 +134,13 @@ $insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 $thumbnailQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_wp_attached_file', ?),
 					(?, '_wp_attachment_metadata', ?)";
+
+/*
+if ($result = $conn->query($selectIdQuery) {
+  var_dump($result);
+  die();
+}
+*/
 
 // Delete current post meta data
 $stmt = $conn->prepare($deleteQuery);
