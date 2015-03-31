@@ -177,7 +177,6 @@ angular.module('tabletopApp')
           // }
 
           // Uploading the Data here so AJAX for Restaurant Goes here
-
           var restAjaxData = {
             "postId": 2000,
             "editLock": null,
@@ -211,10 +210,6 @@ angular.module('tabletopApp')
                 }
                });
 
-          // $http.post( "http://postbin.hackyon.com/6573FC1D11", restAjaxData );
-
-          //$http.jsonp( "http://www.tabletopdine.com/insertRestaurant.php?callback=JSON_CALLBACK&data=" + restAjaxData);
-
           restaurantsRef.child(creatingID).set(dataObject);
           location.reload();
           //wait 3000 mili secs as default to give time to load image.
@@ -232,6 +227,16 @@ angular.module('tabletopApp')
           }
       }
     }
+
+    //Called when 'Update Restaurant' button is pressed in an already created Restaurant
+    // $scope.updateRestaurant = function(restaurant) {
+    //     document.getElementById("missingFieldError2").innerHTML = "<div class='alert alert-info'> <strong>Loading Campaign...</strong>";
+        
+    //     // Validation for non-empty strings for campaign name
+    //     if($scope.selectedCampaign.name === ""){
+    //         $scope.selectedCampaign.name = undefined;
+    //     }
+
 
 
 
