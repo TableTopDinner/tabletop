@@ -240,9 +240,8 @@ angular.module('tabletopApp')
           // restaurantsRef.child(creatingID).set(dataObject);
 
           restaurantsRef.push(dataObject);
-          // var restaurantID = restaurantsRef.key();
-
           location.reload();
+          
           //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
       }
