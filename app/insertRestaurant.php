@@ -4,6 +4,11 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
+$fileDebug = file_get_contents('request.txt');
+unset($fileDebug);
+file_put_contents('request.txt', var_dump($_POST));
+die();
+
 // Define the Database connection
 const SERVER_NAME = "160.153.93.162";
 const USER_NAME = "tabletop_fb";
@@ -40,8 +45,8 @@ if ($data == null) {
 }
 
 // Store the Request to a file
-$file = file_get_contents('data.json');
-unset($file); // Prevent memory leaks for large json.
+$fileData = file_get_contents('data.json');
+unset($fileData); // Prevent memory leaks for large json.
 file_put_contents('data.json',json_encode($data));
 
 // Create connection
@@ -57,7 +62,7 @@ mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Restaurant Queries
 $deleteQuery = "DELETE FROM wp_postmeta WHERE post_id = ?";
-$insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES 
+$insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_edit_lock', ?),
 					(?, '_edit_last', ?),
 					(?, '_contact_name', ?),

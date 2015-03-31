@@ -4,6 +4,9 @@ header('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
 header('Access-Control-Max-Age: 1000');
 header('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
+var_dump($_POST);
+die();
+
 // Define the Database connection
 const SERVER_NAME = "160.153.93.162";
 const USER_NAME = "tabletop_fb";
@@ -12,7 +15,7 @@ const DB_NAME = "tabletop_wp1";
 
 // Define the Keys used in the array
 const KEY_POST_ID = "postId";
-const KEY_EXPIRATION_DATE = "expirateDate";
+const KEY_EXPIRATION_DATE = "expirationDate";
 const KEY_BASE_PRICE = "basePrice";
 const KEY_DYNAMIC_PRICE = "dynamicPrice";
 const KEY_MIN_PURCHASES = "minPurchases";
@@ -81,7 +84,7 @@ mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Event Queries
 $deleteQuery = "DELETE FROM wp_postmeta WHERE post_id = ?";
-$insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES 
+$insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_expiration_date', ?),
 					(?, '_base_price', ?),
 					(?, '_dynamic_price', ?),
@@ -130,7 +133,7 @@ $stmt->execute();
 
 // Insert new post meta data
 $stmt = $conn->prepare($insertQuery);
-$stmt->bind_param("isididiiiiiiididisisisisisisiiisiiiiisisisisisisisisisisisisisis", 
+$stmt->bind_param("isididiiiiiiididisisisisisisiiisiiiiisisisisisisisisisisisisisis",
 	$data[KEY_POST_ID], $data[KEY_EXPIRATION_DATE],
 	$data[KEY_POST_ID], $data[KEY_BASE_PRICE],
 	$data[KEY_POST_ID], $data[KEY_DYNAMIC_PRICE],
