@@ -156,7 +156,7 @@ $stmt->bind_param("isssssssssssssssisissi"
   0,
   "http://www.tabletopdine.com/dev/revision-v-1",
   0,
-  "wg_merchant",
+  "revision",
   null,
   0
 );
