@@ -123,23 +123,36 @@ angular.module('tabletopApp')
       console.log("The read failed: " + errorObject.code);
     });
 
-    eventsRef.once('value', function(allSnapshot) {
-        //For each restaurant in our DB
-        allSnapshot.forEach(function(eventSnapshot) {
-            var i = eventSnapshot.child('id').val();
-            // var r = eventSnapshot.child('rID').val();
+    // eventsRef.once('value', function(allSnapshot) {
+    //     //For each restaurant in our DB
+    //     allSnapshot.forEach(function(eventSnapshot) {
+    //         var i = eventSnapshot.child('id').val();
+    //         // var r = eventSnapshot.child('rID').val();
 
-            if( i !== null ){
-              // set database content into our events array
-              $scope.events[i] = eventSnapshot.val();
-            }
+    //         if( i !== null ){
+    //           // set database content into our events array
+    //           $scope.events[i] = eventSnapshot.val();
+    //         }
 
-            $scope.$apply($scope.events);
-            console.log("Event: " + i);
-       });
-      console.log("All events loaded after this call");
+    //         $scope.$apply($scope.events);
+    //         console.log("Event: " + i);
+    //    });
+    //   console.log("All events loaded after this call");
+    //   $scope.eventsLoaded = true;
+    //   console.log('Array', $scope.events);
+    // });
+
+    eventsRef.once("value", function(snapshot) {
+      snapshot.forEach(function(data) {
+        if (data.val().userID === user.id) {
+                $scope.events.push(data.val());
+        }
+      });
+      console.log("All restaurants loaded after this call");
       $scope.eventsLoaded = true;
-      console.log('Array', $scope.events);
+      console.log('RestaurantObjests:', $scope.events);
+    }, function (errorObject) {
+      console.log("The read failed: " + errorObject.code);
     });
 
 
@@ -280,7 +293,7 @@ angular.module('tabletopApp')
     $scope.createEvent = function() {
 
       //The new restaurant about to be created will always be added to the end of the array
-      var creatingID = $scope.events.length;
+      // var creatingID = $scope.events.length;
 
       //If no missing field errors continue
       try {
@@ -292,7 +305,7 @@ angular.module('tabletopApp')
           var dataObject;
           // if(result === true) {
           dataObject = {
-              "id": creatingID, "name" : $scope.selectedEvent.name, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "price": $scope.selectedEvent.price, "image": $scope.selectedEvent.image, "endDate": $scope.selectedEvent.endDate
+              "name" : $scope.selectedEvent.name, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "userID": $scope.user.id, "price": $scope.selectedEvent.price, "image": $scope.selectedEvent.image, "endDate": $scope.selectedEvent.endDate
           };
           // } else {
           //     dataObject = {
@@ -301,27 +314,27 @@ angular.module('tabletopApp')
           // }
 
           // Uploading the Data here so AJAX for Events Goes here
-          var eventAjaxData = {
-            "postId": 2000,
-            "basePrice": $scope.selectedEvent.price,
-            "amountSaved": $scope.selectedEvent.price,
-            "highlights": $scope.selectedEvent.description
-          };
-          $.ajax({
-             type: "POST",
-             dataType: "json",
-             url: "www.tabletopdine.com/insertEvent.php", //Relative or absolute path to response.php file
-             data: eventAjaxData,
-             success: function(data) {
-                     alert("Form submitted successfully.\nReturned json: " + data["json"]);
-             },
-             error: function(XMLHttpRequest, textStatus, errorThrown) {
-                   alert("Status: " + textStatus); alert("Error: " + errorThrown);
-             }
-           });
+          // var eventAjaxData = {
+          //   "postId": 2000,
+          //   "basePrice": $scope.selectedEvent.price,
+          //   "amountSaved": $scope.selectedEvent.price,
+          //   "highlights": $scope.selectedEvent.description
+          // };
+          // $.ajax({
+          //    type: "POST",
+          //    dataType: "json",
+          //    url: "www.tabletopdine.com/insertEvent.php", //Relative or absolute path to response.php file
+          //    data: eventAjaxData,
+          //    success: function(data) {
+          //            alert("Form submitted successfully.\nReturned json: " + data["json"]);
+          //    },
+          //    error: function(XMLHttpRequest, textStatus, errorThrown) {
+          //          alert("Status: " + textStatus); alert("Error: " + errorThrown);
+          //    }
+          //  });
 
-          eventsRef.child(creatingID).set(dataObject);
-          console.log("Success?");
+          // eventsRef.child(creatingID).set(dataObject);
+          eventsRef.push(dataObject);
           location.reload();
           //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
@@ -340,9 +353,8 @@ angular.module('tabletopApp')
     }
 
     $scope.selectRestaurantAdd = function(restaurant) {
-      alert(restaurant.name);
         document.getElementById("restaurantAddInput").value = restaurant.name;
-        $scope.selectedEvent.restaurant = restaurant.id; //can do restaurant.id
+        $scope.selectedEvent.restaurant = restaurant.name; //can do restaurant.id
     };
 
 
