@@ -22,6 +22,7 @@ const PASSWORD = "Tabletop1!";
 const DB_NAME = "tabletop_wp1";
 
 // Define the Keys used in the array
+const KEY_DESCRIPTION = "description";
 const KEY_TITLE = "postTitle";
 const KEY_POST_ID = "postId";
 const KEY_EDIT_LOCK = "editLock";
@@ -135,7 +136,7 @@ $stmt->bind_param("isssssssssssssssisissi",
   $authorId,
   $today,
   $todayGmt,
-  $empty,
+  $data[KEY_DESCRIPTION],
   $data[KEY_TITLE],
   $empty,
   $a = "publish",

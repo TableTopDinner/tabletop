@@ -81,7 +81,7 @@
                       <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                         Select <span class="caret"></span>
                       </button>
-                      
+
                       <ul class="dropdown-menu" role="menu">
                         <div ng-repeat="restaurant in restaurants">
                           <button class="btn btn-default dropDownButton" ng-click="selectRestaurantAdd(restaurant)">{{restaurant.name}}</button>
@@ -117,7 +117,7 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
+            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd">
               <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
               <span class="btn btn-default btn-file">
                 <input type="file" accept="image/*" capture="camera" id="file-upload-add">
@@ -151,73 +151,73 @@
         </button>
       </div>
 
-      <div class="row modalDetail" style="margin-right: 10px;">
-        <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-          <div class="middle-allign" style="margin-left: 20px; margin-bottom: 20px;">
-            <h1 class="detailName">
-              <input type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
-            </h1>
-            <div class="detailDescription">
-              <textarea class="form-control" name="description" ng-model="selectedEvent.description" placeholder="Description"></textarea>
+      <form action="http://www.tabletopdine.com/insertEvent.php" method="post" onsubmit="return false">
+        <div class="row modalDetail" style="margin-right: 10px;">
+          <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
+            <div class="middle-allign" style="margin-left: 20px; margin-bottom: 20px;">
+              <h1 class="detailName">
+                <input type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
+              </h1>
+              <div class="detailDescription">
+                <textarea class="form-control" name="description" ng-model="selectedEvent.description" placeholder="Description"></textarea>
+              </div>
+              <table class="detailTable table">
+                <tbody>
+                  <tr>
+                    <td class="bolder">Restaurant</td>
+                    <td>
+                      <div class="btn-group" dropdown>
+                        <input readonly class="form-control" type="text" name="restaurant" placeholder="Restaurant" value="{{selectedEvent.restaurant}}" id="restaurantAddInput">
+
+                        <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
+                          Select <span class="caret"></span>
+                        </button>
+
+                        <ul class="dropdown-menu" role="menu">
+                          <div ng-repeat="restaurant in restaurants">
+                            <button class="btn btn-default dropDownButton" ng-click="selectRestaurantAdd(restaurant)">{{restaurant.name}}</button>
+                          </div>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bolder">End Date</td>
+                    <td>
+                      <input class="form-control" type="text" ng-model="selectedEvent.endDate" name="date" placeholder="mm/dd/yy" >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="bolder">Price</td>
+                    <td>
+                      <input class="form-control" type="number" min="0" step="0.01" ng-model="selectedEvent.price" name="date" placeholder="$0.00" >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <!-- START Error & Success Messages -->
+              <div class="text-center missingFieldError" id="missingFieldError"></div>
+              <!-- End Error & Success Messages -->
+
+              <div class="modalButtonGroup">
+                <button class="btn modalButton btn-warning" ng-click="updateEvent(selectedEvent)">Update</button>
+              </div>
+
             </div>
-            <table class="detailTable table">
-              <tbody>
-                <tr>
-                  <td class="bolder">Restaurant</td>
-                  <td>
-                    <div class="btn-group" dropdown>
-                      <input readonly class="form-control" type="text" name="restaurant" placeholder="Restaurant" value="{{selectedEvent.restaurant}}" id="restaurantAddInput">
-
-                      <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
-                        Select <span class="caret"></span>
-                      </button>
-                      
-                      <ul class="dropdown-menu" role="menu">
-                        <div ng-repeat="restaurant in restaurants">
-                          <button class="btn btn-default dropDownButton" ng-click="selectRestaurantAdd(restaurant)">{{restaurant.name}}</button>
-                        </div>
-                      </ul>
-                    </div>
-
-
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">End Date</td>
-                  <td>
-                    <input class="form-control" type="text" ng-model="selectedEvent.endDate" name="date" placeholder="00/00/00" >
-                  </td>
-                </tr>
-                <tr>
-                  <td class="bolder">Price</td>
-                  <td>
-                    <input class="form-control" type="number" min="0" step="0.01" ng-model="selectedEvent.price" name="date" placeholder="$0.00" >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <!-- START Error & Success Messages -->
-            <div class="text-center missingFieldError" id="missingFieldError"></div>
-            <!-- End Error & Success Messages -->
-
-            <div class="modalButtonGroup">
-              <button class="btn modalButton btn-warning" ng-click="updateEvent(selectedEvent)">Update</button>
-            </div>
-
           </div>
-        </div>
 
-        <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
-              <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
-              <span class="btn btn-default btn-file">
-                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
-              </span>
-              <div id="spinAdd"></div>
-        </div>
+          <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
+              <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd">
+                <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
+                <span class="btn btn-default btn-file">
+                  <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                </span>
+                <div id="spinAdd"></div>
+          </div>
 
-      </div>
+        </div>
+      </form>
     </div>
 
   </div>
