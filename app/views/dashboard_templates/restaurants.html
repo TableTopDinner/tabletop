@@ -15,6 +15,7 @@
         <i style="margin: 15px;" class="fa fa-cutlery fa-4x"><span> {{restaurant.name}}</span></i>
         <div class="container"><strong>Address:</strong> {{restaurant.address}}</div>
         <div class="container"><strong>Phone #:</strong> {{restaurant.phoneNum}}</div>
+        <img src="../images/rPlaceholder.png" width="205" height="146" style="float: right;  margin-top: -126px; margin-right: .5px;" >
         <br>
       </div>
       <br>
@@ -39,15 +40,15 @@
 
         <div class="modal-dismiss">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true" style="font-size: 40px;">&times;</span>
+            <span aria-hidden="true" style="font-size: 40px; margin-right: 10px;" >&times;</span>
             <span class="sr-only">Close</span>
           </button>
         </div>
 
-        <div class="row modalDetail">
+        <div class="row modalDetail" style="margin-right: 10px;">
           <form action="http://www.tabletopdine.com/insertRestaurant.php" method="post">
           <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-            <div class="middle-allign">
+            <div class="middle-allign" style="margin-left: 20px;">
               <h1 class="detailName">
                 <input type="text" ng-model="selectedRestaurant.name" name="postTitle" placeholder="Name">
               </h1>
@@ -152,14 +153,14 @@
 
         <div class="modal-dismiss">
           <button type="button" class="close" data-dismiss="modal">
-            <span aria-hidden="true" style="font-size: 40px;">&times;</span>
+            <span aria-hidden="true" style="font-size: 40px; margin-right: 10px;">&times;</span>
             <span class="sr-only">Close</span>
           </button>
         </div>
 
-        <div class="row modalDetail">
+        <div class="row modalDetail" style="margin-right: 10px;">
           <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-            <div class="middle-allign">
+            <div class="middle-allign" style="margin-left: 20px;">
               <h1 class="detailName">
                 <input type="text" ng-model="selectedRestaurant.name" name="name" placeholder="{{selectedRestaurant.name}}">
               </h1>
