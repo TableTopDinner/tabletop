@@ -7,7 +7,7 @@
   <!-- START Create New Event Selectable -->
   <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-animate="'animate'">
     <div style="width: 225px;" class="card-background" ng-click="instantiateEvent(event)" data-toggle="modal" data-target="#createEventModal">
-      <img src="https://media.licdn.com/media/p/5/000/283/112/1959ca5.png" class="img-responsive card-img">
+      <img style="background-color: orange; padding-top: 40px; padding-bottom: 40px;" src="https://media.licdn.com/media/p/5/000/283/112/1959ca5.png" class="img-responsive card-img">
       <div class="card-header text-center">Create New Event</div>
       <div class="card-description">Click here to add a new Event!</div>
     </div>
@@ -56,14 +56,14 @@
 
       <div class="modal-dismiss">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
+          <span style="font-size: 40px; margin-top: -10px; margin-right: 5px; margin-bottom: 10px;" aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
       </div>
 
-      <div class="row modalDetail">
+      <div class="row modalDetail" style="margin-right: 10px;">
         <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-          <div class="middle-allign">
+          <div class="middle-allign" style="margin-left: 20px; margin-bottom: 20px;">
             <h1 class="detailName">
               <input type="text" ng-model="selectedEvent.name" name="postTitle" placeholder="Name">
             </h1>
@@ -110,7 +110,7 @@
             <!-- End Error & Success Messages -->
 
             <div class="modalButtonGroup">
-              <button class="btn modalButton" ng-click="createEvent(selectedEvent)">Create</button>
+              <button class="btn modalButton btn-warning" ng-click="createEvent(selectedEvent)">Create</button>
             </div>
 
           </div>
@@ -146,14 +146,14 @@
 
       <div class="modal-dismiss">
         <button type="button" class="close" data-dismiss="modal">
-          <span aria-hidden="true">&times;</span>
+          <span style="font-size: 40px; margin-top: -10px; margin-right: 5px; margin-bottom: 10px;" aria-hidden="true">&times;</span>
           <span class="sr-only">Close</span>
         </button>
       </div>
 
-      <div class="row modalDetail">
+      <div class="row modalDetail" style="margin-right: 10px;">
         <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-          <div class="middle-allign">
+          <div class="middle-allign" style="margin-left: 20px; margin-bottom: 20px;">
             <h1 class="detailName">
               <input type="text" ng-model="selectedEvent.name" name="name" placeholder="Name">
             </h1>
@@ -166,7 +166,7 @@
                   <td class="bolder">Restaurant</td>
                   <td>
                     <div class="btn-group" dropdown>
-                      <input readonly class="form-control" type="text" name="restaurant" placeholder="Restaurant" value="{{restaurants[selectedEvent.restaurant].name}}" id="restaurantAddInput">
+                      <input readonly class="form-control" type="text" name="restaurant" placeholder="Restaurant" value="{{selectedEvent.restaurant}}" id="restaurantAddInput">
 
                       <button type="button" class="btn btn-default dropdown-toggle" dropdown-toggle ng-disabled="disabled">
                         Select <span class="caret"></span>
