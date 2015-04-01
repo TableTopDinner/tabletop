@@ -33,7 +33,7 @@
   <!-- START previously created Events Selectable -->
   <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-repeat="event in events track by $index" ng-animate="'animate'">
     <div class="card-background" ng-click="selectEvent(event)" data-toggle="modal" data-target="#updateEventModal">
-      <img ng-src="{{event.image}}" class="img-responsive card-img" >
+      <img ng-src="{{event.imgSrc}}" class="img-responsive card-img" >
       <div class="card-header">{{event.name}}</div>
       <div class="card-description">{{event.description | cut:true:105:'...'}}</div>
     </div>
@@ -117,10 +117,10 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
+            <img src="{{selectedEvent.imgSrc}}" class="img-responsive" id="canvasCreateEvent"> 
               <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
               <span class="btn btn-default btn-file">
-                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                <input type="file" accept="image/*" capture="camera" id="file-event-create">
               </span>
               <div id="spinAdd"></div>
         </div>
@@ -209,10 +209,10 @@
         </div>
 
         <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-            <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd"> 
+            <img src="{{selectedEvent.imgSrc}}" class="img-responsive" id="canvasUpdateEvent"> 
               <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
               <span class="btn btn-default btn-file">
-                <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                <input type="file" accept="image/*" capture="camera" id="file-event-update">
               </span>
               <div id="spinAdd"></div>
         </div>

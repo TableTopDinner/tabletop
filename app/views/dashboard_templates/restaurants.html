@@ -15,7 +15,7 @@
         <i style="margin: 15px;" class="fa fa-cutlery fa-4x"><span> {{restaurant.name}}</span></i>
         <div class="container"><strong>Address:</strong> {{restaurant.address}}</div>
         <div class="container"><strong>Phone #:</strong> {{restaurant.phoneNum}}</div>
-        <img src="../images/rPlaceholder.png" width="205" height="146" style="float: right;  margin-top: -126px; margin-right: .5px;" >
+        <img src="{{restaurant.imgSrc}}" width="205" height="146" style="float: right;  margin-top: -126px; margin-right: .5px;" >
         <br>
       </div>
       <br>
@@ -125,10 +125,10 @@
             </div>
 
             <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-                <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd">
+                <img ng-src="{{selectedRestaurant.imgSrc}}" class="img-responsive" id="canvasCreateRestaurant">
                   <span id="upload-image"><strong>UPLOAD IMAGE</strong></span>
                   <span class="btn btn-default btn-file">
-                    <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                    <input type="file" accept="image/*" capture="camera" id="file-restaurant-create">
                   </span>
                   <div id="spinAdd"></div>
             </div>
@@ -238,10 +238,10 @@
           </div>
 
           <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
-              <img src="../images/rPlaceholder.png" class="img-responsive" id="panoAdd">
+              <img src="{{selectedRestaurant.imgSrc}}" class="img-responsive" id="canvasUpdateRestaurant">
                 <span id="upload-image"><strong>UPDATE IMAGE</strong></span>
                 <span class="btn btn-default btn-file">
-                  <input type="file" accept="image/*" capture="camera" id="file-upload-add">
+                  <input type="file" accept="image/*" capture="camera" id="file-restaurant-update">
                 </span>
                 <div id="spinAdd"></div>
           </div>

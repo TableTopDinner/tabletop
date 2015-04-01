@@ -156,6 +156,74 @@ angular.module('tabletopApp')
     });
 
 
+//*****************************************************************//
+//******************** Image Upload and Resize ********************//
+
+    // var spinner = new Spinner({color: '#ddd'});
+    var resizedRestaurantImgSrcData = "../images/rPlaceholder.png";
+    var resizedEventImgSrcData = "../images/rPlaceholder.png";
+    // var resizedThumbSrcData = "../images/defaultplaceholder (Custom).png";
+    // var resizedBrandImgSrcData = "../images/defaultplaceholder.png";
+    // var resizedBrandThumbSrcData = "../images/defaultplaceholder (Custom).png";
+
+    //Declare a new Image object that will be instantiate with the uploaded image data
+    var img = new Image(); 
+    //Resize the image using canvas
+    function imageResizeToDataURL(image, width, height) {
+        var canvas = document.createElement("canvas");
+        canvas.width = width;
+        canvas.height = height;
+        canvas.getContext("2d").drawImage(image, 0, 0, width, height);
+        return canvas.toDataURL();
+    }
+
+    function handleRestaurantImgSelect(evt) {
+      alert("Hello handleRestaurantImgSelect");
+      var f = evt.target.files[0];
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+            img.src = e.target.result; //img to be resized instantiated.
+            resizedRestaurantImgSrcData = imageResizeToDataURL(img, 574 ,490);
+            document.getElementById("canvasCreateRestaurant").src = e.target.result;  //Create Restaurant Modal
+            document.getElementById("canvasUpdateRestaurant").src = e.target.result;  //Updating Restaurant Modals
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+    function handleEventImgSelect(evt) {
+      alert("Hello handleEventImgSelect");
+      var f = evt.target.files[0];
+      var reader = new FileReader();
+      reader.onload = (function(theFile) {
+        return function(e) {
+            img.src = e.target.result; //img to be resized instantiated.
+            resizedEventImgSrcData = imageResizeToDataURL(img, 574 ,490);
+            document.getElementById("canvasCreateEvent").src = e.target.result;  //Create Restaurant Modal
+            document.getElementById("canvasUpdateEvent").src = e.target.result;  //Updating Restaurant Modals
+        };
+      })(f);
+      reader.readAsDataURL(f);
+    }
+
+     // $(function() {
+    $timeout( function() { 
+      document.getElementById("file-restaurant-create").addEventListener('change', handleRestaurantImgSelect, false);  //Create Restaurant Modal
+      document.getElementById("file-restaurant-update").addEventListener('change', handleRestaurantImgSelect, false);  //Updating Restaurant Modal
+      document.getElementById("file-event-create").addEventListener('change', handleEventImgSelect, false);  //Create Restaurant Modal
+      document.getElementById("file-event-update").addEventListener('change', handleEventImgSelect, false);  //Updating Restaurant Modal
+     }, 3000, true);
+        // $('#spinAdd').append(spinner);
+        // document.getElementById("file-upload-create").addEventListener('change', handleRestaurantImgSelect, false);  //Create Restaurant Modal
+        // document.getElementById("file-upload-update").addEventListener('change', handleRestaurantImgSelect, false);  //Updating Restaurant Modal
+    // });
+// END: Image Upload and Resize //
+// **************************** //
+
+
+
+
+
     //Refreshes the add restaurant modal everytime it is selected (clicked on).
     $scope.instantiateRestaurant = function() {
       $scope.selectedRestaurant = {};
@@ -171,6 +239,9 @@ angular.module('tabletopApp')
       $scope.selectedRestaurant.email = "";
       $scope.selectedRestaurant.phoneNum = "";
       $scope.selectedRestaurant.userID = user.id;
+      //Refreshes selected image file in upload images 
+      document.getElementById("canvasCreateRestaurant").src = "../images/rPlaceholder.png";
+      $( "#file-upload-create" ).val("");
 
       //Removes alerts if there previously
       document.getElementById("missingFieldError").innerHTML = "";
@@ -185,23 +256,16 @@ angular.module('tabletopApp')
     //Called when 'Create' button is pressed within the Create New Restaurant modal
     $scope.createRestaurant = function() {
 
-      //The new restaurant about to be created will always be added to the end of the array
-      // var creatingID = $scope.restaurants.length;
+      // spinner.spin(document.getElementById('spinAdd')); //Loading Spinner for image upload
 
       //If no missing field errors continue
       try {
           // (Need It For Image Upload Ignore For Now) document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-info'> <strong>Loading Restuarant...</strong>";
 
           var dataObject;
-          // if(result === true) {
           dataObject = {
-              "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "type": $scope.selectedRestaurant.type, "website": $scope.selectedRestaurant.website, "address1": $scope.selectedRestaurant.address1, "address2": $scope.selectedRestaurant.address2, "city": $scope.selectedRestaurant.city, "state": $scope.selectedRestaurant.state, "zipcode": $scope.selectedRestaurant.zipcode, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "userID": $scope.selectedRestaurant.userID
+              "name" : $scope.selectedRestaurant.name, "imgSrc": resizedRestaurantImgSrcData, "description": $scope.selectedRestaurant.description, "type": $scope.selectedRestaurant.type, "website": $scope.selectedRestaurant.website, "address1": $scope.selectedRestaurant.address1, "address2": $scope.selectedRestaurant.address2, "city": $scope.selectedRestaurant.city, "state": $scope.selectedRestaurant.state, "zipcode": $scope.selectedRestaurant.zipcode, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "userID": $scope.selectedRestaurant.userID
           };
-          // } else {
-          //     dataObject = {
-          //         "name" : $scope.selectedRestaurant.name, "description": $scope.selectedRestaurant.description, "address": $scope.selectedRestaurant.address, "email": $scope.selectedRestaurant.email, "phoneNum": $scope.selectedRestaurant.phoneNum, "license": $scope.selectedRestaurant.license
-          //     };
-          // }
 
           // Uploading the Data here so AJAX for Restaurant Goes here
           // var restAjaxData = {
@@ -241,6 +305,7 @@ angular.module('tabletopApp')
 
           restaurantsRef.push(dataObject);
           location.reload();
+          // $timeout( function() { restaurantsRef.push(dataObject); alert(dataObject.imgSrc); location.reload(); }, 3000, true);
 
           //wait 3000 mili secs as default to give time to load image.
           // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
@@ -268,8 +333,6 @@ angular.module('tabletopApp')
     //     }
 
 
-
-
     $scope.selectEvent = function(object) {
        $scope.selectedEvent = object;
     };
@@ -282,7 +345,7 @@ angular.module('tabletopApp')
       $scope.selectedEvent.restaurant = "";
       $scope.selectedEvent.endDate = "";
       $scope.selectedEvent.price = "0";
-      $scope.selectedEvent.image = "https://media.licdn.com/media/p/5/000/283/112/1959ca5.png";
+      $scope.selectedEvent.imgSrc = "http://placehold.it/400x300";
       // $scope.selectedEvent.rID = ;
 
       //Removes alerts if there previously
@@ -304,7 +367,7 @@ angular.module('tabletopApp')
           var dataObject;
           // if(result === true) {
           dataObject = {
-              "name" : $scope.selectedEvent.name, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "userID": $scope.user.id, "price": $scope.selectedEvent.price, "image": $scope.selectedEvent.image, "endDate": $scope.selectedEvent.endDate
+              "name" : $scope.selectedEvent.name, "imgSrc": resizedEventImgSrcData, "description": $scope.selectedEvent.description, "restaurant": $scope.selectedEvent.restaurant, "userID": $scope.user.id, "price": $scope.selectedEvent.price, "endDate": $scope.selectedEvent.endDate
           };
           // } else {
           //     dataObject = {
@@ -333,10 +396,10 @@ angular.module('tabletopApp')
           //  });
 
           // eventsRef.child(creatingID).set(dataObject);
-          eventsRef.push(dataObject);
-          location.reload();
+          // eventsRef.push(dataObject);
+          // location.reload();
           //wait 3000 mili secs as default to give time to load image.
-          // (Need It For Image Upload Ignore For Now) $timeout( function() {spinner.stop(); $scope.restuarant.push(dataObject); document.getElementById("missingFieldError").innerHTML = "<div class='alert alert-success'> <strong>Success!</strong>";}, 3000, true);
+          $timeout( function() { eventsRef.push(dataObject); alert(dataObject.imgSrc); location.reload(); }, 3000, true);
       }
       //If there are missing field errors alert that silly reatuarnt owner
       catch(err) {
