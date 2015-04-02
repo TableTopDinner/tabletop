@@ -48,6 +48,9 @@ $zero = 0;
 
 $id = 0;
 
+$facebook = "http://www.facebook.com";
+$twitter = "http://www.twitter.com";
+
 date_default_timezone_set("America/Phoenix");
 $today = (new DateTime("NOW"))->format("Y-m-d H:i:s");
 date_default_timezone_set("Europe/London");
@@ -200,8 +203,8 @@ $stmt->bind_param("isiiisisisisisisisisisisis",
 	$id, $data[KEY_CONTACT_COUNTRY],
 	$id, $data[KEY_CONTACT_PHONE],
 	$id, $data[KEY_WEBSITE],
-	$id, $data[KEY_FACEBOOK],
-	$id, $data[KEY_TWITTER]
+	$id, ($data[KEY_FACEBOOK] != null && is_string($data[KEY_FACEBOOK]) && strlen($data[KEY_FACEBOOK]) > 0) ? $data[KEY_FACEBOOK] : $facebook,
+	$id, ($data[KEY_TWITTER] != null && is_string($data[KEY_TWITTER]) && strlen($data[KEY_TWITTER]) > 0) ? $data[KEY_TWITTER] : $twitter
 );
 $stmt->execute();
 
@@ -225,8 +228,5 @@ unset($deleteMetadataQuery);
 unset($insertMetadataQuery);
 unset($thumbnailMetadataQuery);
 unset($conn);
-
-header("Location: http://www.tabletopdine.com/dev/business/" . create_slug($data[KEY_TITLE]));
-die();
 
 ?>

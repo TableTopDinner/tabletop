@@ -64,15 +64,27 @@ const KEY_FEATURED_CONTENT = "featuredContent";
 $authorId = 2;
 $empty = "";
 $zero = 0;
+$one = 1;
+$hundred = 100;
+$description = "&nbsp;";
+
+$merchantId = 214;
 
 $id = 0;
+$thumbId = 0;
+
+$hash = md5(uniqid(rand(), true));
 
 $taxRate = "standard-rate";
 $shippingMode = "flat-rate-5";
 $shippingDynPrice = "a:0:{}";
 
+$highlight = "Check out this deal!";
+$finePrint = "Read the fine print...";
+
 date_default_timezone_set("America/Phoenix");
 $today = (new DateTime("NOW"))->format("Y-m-d H:i:s");
+$expiration = (new DateTime("NOW"))->format("Y-m-d H:i:s");
 date_default_timezone_set("Europe/London");
 $todayGmt = (new DateTime("NOW"))->format("Y-m-d H:i:s");
 
@@ -104,7 +116,7 @@ if ($conn->connect_error) {
 mysqli_report(MYSQLI_REPORT_ALL);
 
 // Initialize the Event Queries
-$selectIdQuery = "SELECT ID FROM wp_posts ORDER BY ID DESC LIMIT 1";
+$selectIdQuery = "SELECT MAX(ID) FROM wp_posts";
 $deletePostQuery = "DELETE FROM wp_posts WHERE ID = ?";
 $insertPostQuery = "INSERT INTO wp_posts(post_author, post_date, post_date_gmt, post_content, post_title, post_excerpt,
           post_status, comment_status, ping_status, post_password, post_name, to_ping, pinged,
@@ -112,8 +124,8 @@ $insertPostQuery = "INSERT INTO wp_posts(post_author, post_date, post_date_gmt, 
           post_type, post_mime_type, comment_count) VALUES
           (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
 
-$deleteQuery = "DELETE FROM wp_postmeta WHERE post_id = ?";
-$insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
+$deleteMetadataQuery = "DELETE FROM wp_postmeta WHERE post_id = ?";
+$insertMetadataQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_expiration_date', ?),
 					(?, '_base_price', ?),
 					(?, '_dynamic_price', ?),
@@ -130,7 +142,7 @@ $insertQuery = "INSERT INTO wp_postmeta(post_id, meta_key, meta_value) VALUES
 					(?, '_voucher_serial_number', ?),
 					(?, '_merchant_id', ?),
 					(?, '_voucher_locations', ?),
-					(?, '_thumbnail_id', ?)
+					(?, '_thumbnail_id', ?),
 					(?, '_number_of_purchases', ?),
 					(?, '_edit_lock', ?),
 					(?, '_edit_last', ?),
@@ -156,6 +168,7 @@ if ($result = $conn->query($selectIdQuery)) {
 
   if (is_numeric($row[0])) {
     $id = $row[0] + 1;
+    $thumbId = $id + 2;
   }
 } else {
   echo "ERROR - Could not retrieve ID from the wp_posts table\n";
@@ -178,7 +191,7 @@ $stmt->bind_param("isssssssssssssssisissi",
   $authorId,
   $today,
   $todayGmt,
-  $data[KEY_DESCRIPTION],
+  ($data[KEY_DESCRIPTION] != null && is_string($data[KEY_DESCRIPTION]) && strlen($data[KEY_DESCRIPTION]) > 0) ? $data[KEY_DESCRIPTION] : $description,
   $data[KEY_TITLE],
   $empty,
   $a = "publish",
@@ -228,27 +241,55 @@ $stmt->bind_param("isssssssssssssssisissi",
 );
 $stmt->execute();
 
-// Insert new post meta data
-$stmt = $conn->prepare($insertQuery);
+// Insert Image data for event
+$stmt = $conn->prepare($insertPostQuery);
+$stmt->bind_param("isssssssssssssssisissi",
+  $authorId,
+  $today,
+  $todayGmt,
+  $hash,
+  $hash,
+  $empty,
+  $a = "inherit",
+  $b = "open",
+  $c = "open",
+  $empty,
+  $hash,
+  $empty,
+  $empty,
+  $today,
+  $todayGmt,
+  $empty,
+  $id,
+  $d = ("http://stuffpoint.com/food/image/235785-food-fast-food-combo.png"),
+  $zero,
+  $e = "attachment",
+  $f = "image/png",
+  $zero
+);
+$stmt->execute();
+
+// // Insert new post meta data
+$stmt = $conn->prepare($insertMetadataQuery);
 $stmt->bind_param("isididiiiiiiididisisisisisisiiisiiiiisisisisisisisisisisisisisis",
-	$id, $data[KEY_EXPIRATION_DATE],
-	$id, $data[KEY_BASE_PRICE],
-	$id, $data[KEY_DYNAMIC_PRICE],
-	$id, $data[KEY_MIN_PURCHASES],
-	$id, $data[KEY_MAX_PURCHASES],
-	$id, $data[KEY_MAX_PURCHASES_PER_USER],
-	$id, $data[KEY_VALUE],
-	$id, $data[KEY_AMOUNT_SAVED],
-	$id, $data[KEY_HIGHLIGHTS],
-	$id, $data[KEY_FINE_PRINT],
-	$id, $data[KEY_VOUCHER_EXPIRATION_DATE],
+	$id, ($data[KEY_EXPIRATION_DATE] != null && is_string($data[KEY_EXPIRATION_DATE]) && !empty($data[KEY_EXPIRATION_DATE])) ? $data[KEY_EXPIRATION_DATE] : $expiration,
+	$id, ($data[KEY_BASE_PRICE] != null && is_numeric($data[KEY_BASE_PRICE]) && $data[KEY_BASE_PRICE] > 0) ? $data[KEY_BASE_PRICE] : $zero,
+	$id, ($data[KEY_DYNAMIC_PRICE] != null && is_numeric($data[KEY_DYNAMIC_PRICE]) && $data[KEY_DYNAMIC_PRICE] > 0) ? $data[KEY_DYNAMIC_PRICE] : $zero,
+	$id, ($data[KEY_MIN_PURCHASES] != null && is_numeric($data[KEY_MIN_PURCHASES]) && $data[KEY_MIN_PURCHASES] > 0) ? $data[KEY_MIN_PURCHASES] : $one,
+	$id, ($data[KEY_MAX_PURCHASES] != null && is_numeric($data[KEY_MAX_PURCHASES]) && $data[KEY_MAX_PURCHASES] > 0) ? $data[KEY_MAX_PURCHASES] : $hundred,
+	$id, ($data[KEY_MAX_PURCHASES_PER_USER] != null && is_numeric($data[KEY_MAX_PURCHASES_PER_USER]) && $data[KEY_MAX_PURCHASES_PER_USER] > 0) ? $data[KEY_MAX_PURCHASES_PER_USER] : $one,
+	$id, ($data[KEY_VALUE] != null && is_numeric($data[KEY_VALUE]) && $data[KEY_VALUE] > 0) ? $data[KEY_VALUE] : $zero,
+	$id, ($data[KEY_AMOUNT_SAVED] != null && is_numeric($data[KEY_VALUE]) && $data[KEY_AMOUNT_SAVED] > 0) ? $data[KEY_VALUE] : $zero,
+	$id, ($data[KEY_HIGHLIGHTS] != null && is_string($data[KEY_HIGHLIGHTS]) && !empty($data[KEY_HIGHLIGHTS])) ? $data[KEY_HIGHLIGHTS] : $highlight,
+	$id, ($data[KEY_FINE_PRINT] != null && is_string($data[KEY_FINE_PRINT]) && !empty($data[KEY_FINE_PRINT])) ? $data[KEY_FINE_PRINT] : $finePrint,
+	$id, ($data[KEY_VOUCHER_EXPIRATION_DATE] != null && is_string($data[KEY_VOUCHER_EXPIRATION_DATE]) && !empty($data[KEY_VOUCHER_EXPIRATION_DATE])) ? $data[KEY_VOUCHER_EXPIRATION_DATE] : $expiration,
 	$id, $data[KEY_VOUCHER_HOW_TO_USE],
 	$id, $data[KEY_VOUCHER_MAP],
-	$id, $data[KEY_VOUCHER_SERIAL_NUMBER],
-	$id, $data[KEY_MERCHANT_ID],
+	$id, ($data[KEY_VOUCHER_SERIAL_NUMBER] != null && is_string($data[KEY_VOUCHER_SERIAL_NUMBER]) && !empty($data[KEY_VOUCHER_SERIAL_NUMBER])) ? $data[KEY_VOUCHER_SERIAL_NUMBER] : $hash,
+	$id, ($data[KEY_MERCHANT_ID] != null && is_string($data[KEY_MERCHANT_ID]) && !empty($data[KEY_MERCHANT_ID])) ? $data[KEY_MERCHANT_ID] : $merchantId,
 	$id, $data[KEY_VOUCHER_LOCATIONS],
-	$id, $data[KEY_THUMBNAIL_ID],
-	$id, $data[KEY_NUMBER_OF_PURCHASES],
+	$id, $thumbId,
+	$id, $zero,
 	$id, $data[KEY_EDIT_LOCK],
 	$id, $data[KEY_EDIT_LAST],
 	$id, $data[KEY_REDIRECT_URL],
@@ -261,6 +302,7 @@ $stmt->bind_param("isididiiiiiiididisisisisisisiiisiiiiisisisisisisisisisisisisi
 	$id, $data[KEY_VOUCHER_ID_PREFIX],
 	$id, $data[KEY_VOUCHER_LOGO],
 	$id, $data[KEY_CAPTURE_BEFORE_EXPIRATION],
+	$id, $data[KEY_PREVIEW_PRIVATE_KEY],
 	$id, $data[KEY_FEATURED_CONTENT]
 );
 $stmt->execute();
