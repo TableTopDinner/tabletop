@@ -414,11 +414,26 @@ angular.module('tabletopApp')
       }
     }
 
+    $scope.deleteEvent = function(restaurant) {
+      // ref.child(key).remove();
+      alert("ARRRRRG");
+        eventsRef.once("value", function(snapshot) {
+        snapshot.forEach(function(data) {
+          if (data.val().name === restaurant.name) {
+            alert(data.key());
+          }
+        });
+      }, function (errorObject) {
+        console.log("The read failed: " + errorObject.code);
+      });
+    };
+
     $scope.selectRestaurantAdd = function(restaurant) {
         document.getElementById("restaurantAddInput").value = restaurant.name;
         $scope.selectedEvent.restaurant = restaurant.name; 
         // alert($scope.selectedEvent.restaurant);
     };
+
 
 
 }); //This is the end of the page dum dum dum (angular.module) ("'\(>.<)/") <-- "that is zach"

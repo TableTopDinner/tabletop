@@ -32,6 +32,10 @@
 
   <!-- START previously created Events Selectable -->
   <div class="col-xs-6 col-sm-4 col-md-4 col-lg-3 img-thumbs" ng-repeat="event in events track by $index" ng-animate="'animate'">
+    <!-- <button type="button" class="delete" ng-click="deleteEvent(event)">
+        <span>&times;</span>
+      <span class="sr-only">Delete</span>
+    </button> -->
     <div class="card-background" ng-click="selectEvent(event)" data-toggle="modal" data-target="#updateEventModal">
       <img ng-src="{{event.imgSrc}}" class="img-responsive card-img" >
       <div class="card-header">{{event.name}}</div>
