@@ -207,7 +207,7 @@ $stmt->bind_param("isssssssssssssssisissi",
   $zero,
   $d = ("http://www.tabletopdine.com/dev/?post_type=wg_merchant&#038;p=" . $id),
   $zero,
-  $e = "wg_merchant",
+  $e = "wg_deal",
   $empty,
   $zero
 );
