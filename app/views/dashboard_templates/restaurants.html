@@ -158,84 +158,85 @@
           </button>
         </div>
 
-        <div class="row modalDetail" style="margin-right: 10px;">
-          <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
-            <div class="middle-allign" style="margin-left: 20px;">
-              <h1 class="detailName">
-                <input type="text" ng-model="selectedRestaurant.name" name="name" placeholder="{{selectedRestaurant.name}}">
-              </h1>
-              <div class="detailDescription">
-                <textarea class="form-control" name="description" ng-model="selectedRestaurant.description" placeholder="{{selectedRestaurant.description}}"></textarea>
+        <form action="http://www.tabletopdine.com/insertRestaurant.php" method="post" onsubmit="return false">
+          <div class="row modalDetail" style="margin-right: 10px;">
+            <div class="col-xs-12 col-sm-6 col-md-6 detailLeft text-left">
+              <div class="middle-allign" style="margin-left: 20px;">
+                <h1 class="detailName">
+                  <input type="text" ng-model="selectedRestaurant.name" name="name" placeholder="{{selectedRestaurant.name}}">
+                </h1>
+                <div class="detailDescription">
+                  <textarea class="form-control" name="description" ng-model="selectedRestaurant.description" placeholder="{{selectedRestaurant.description}}"></textarea>
+                </div>
+                <table class="detailTable table">
+                  <tbody>
+                    <tr>
+                      <td class="bolder">Type</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.type" name="type" placeholder="Type">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Website</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.website" name="website" placeholder="URL">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Address Line 1</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.address1" name="address1" placeholder="Address Line 1">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Address Line 2</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.address2" name="address2" placeholder="Address Line 2">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">City</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.city" name="city" placeholder="City" >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">State</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.state" name="state" placeholder="State" >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Zipcode</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.zipcode" name="zipcode" placeholder="Zipcode" >
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Email</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.email" name="type" placeholder="Email">
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="bolder">Phone Number</td>
+                      <td>
+                        <input class="form-control" type="text" ng-model="selectedRestaurant.phoneNum" name="brand" placeholder="Phone Number" >
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+                <!-- START Error & Success Messages -->
+                <div class="text-center missingFieldError" id="missingFieldError"></div>
+                <!-- End Error & Success Messages -->
+
+                <div class="modalButtonGroup" style="margin-bottom:20px; text-align:center;">
+                  <button class="btn modalButton btn-warning" ng-click="updateRestaurant(selectedRestaurant)">Update</button>
+                </div>
+
               </div>
-              <table class="detailTable table">
-                <tbody>
-                  <tr>
-                    <td class="bolder">Type</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.type" name="type" placeholder="Type">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Website</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.website" name="website" placeholder="URL">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Address Line 1</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.address1" name="address1" placeholder="Address Line 1">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Address Line 2</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.address2" name="address2" placeholder="Address Line 2">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">City</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.city" name="city" placeholder="City" >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">State</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.state" name="state" placeholder="State" >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Zipcode</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.zipcode" name="zipcode" placeholder="Zipcode" >
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Email</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.email" name="type" placeholder="Email">
-                    </td>
-                  </tr>
-                  <tr>
-                    <td class="bolder">Phone Number</td>
-                    <td>
-                      <input class="form-control" type="text" ng-model="selectedRestaurant.phoneNum" name="brand" placeholder="Phone Number" >
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-
-              <!-- START Error & Success Messages -->
-              <div class="text-center missingFieldError" id="missingFieldError"></div>
-              <!-- End Error & Success Messages -->
-
-              <div class="modalButtonGroup" style="margin-bottom:20px; text-align:center;">
-                <button class="btn btn-warning" ng-click="updateRestaurant(selectedRestaurant)">Update</button>
-              </div>
-
             </div>
-          </div>
 
           <div class="col-xs-12 col-sm-6 col-md-6 detailRight">
               <img src="{{selectedRestaurant.imgSrc}}" class="img-responsive" id="canvasUpdateRestaurant">
@@ -245,8 +246,7 @@
                 </span>
                 <div id="spinAdd"></div>
           </div>
-
-        </div>
+        </form>
       </div>
 
     </div>
